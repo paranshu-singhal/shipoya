@@ -8,5 +8,10 @@
     <color name="view_orders_appbar">#e7cbc9</color>
 
     <color name="app_bg">#eeeeee</color>
+	
+	<color name="dark_grey">#666666</color>
+    <color name="white">#fff</color>
+
+    <color name="black_overlay">#66000000</color>
 
 </resources>
