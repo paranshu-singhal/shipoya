@@ -29,12 +29,11 @@
     <string name="all">ALL</string>
     <string name="scheduled">SCHEDULED</string>
     <string name="in_transit">IN-TRANSIT</string>
+    <string name="delivered">DELIVERED</string>
 	
 	<string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_settings">Settings</string>
 
-    <string name="get_truck">GET TRUCK</string>
     <string name="view_orders">VIEW ORDERS</string>
     <string name="view_quotes">VIEW QUOTES</string>
     <string name="view_invoices">VIEW INVOICES</string>
@@ -49,21 +48,16 @@
     <string name="view_quotes_1">View Quotes</string>
     <string name="view_invoices_1">View Invoices</string>
     <string name="logout">Logout</string>
-    <string name="login">Login</string>
+
     <string name="forgot_password">Forgot password ?</string>
     <string name="contact_us">Contact Us</string>
 
     <string name="username">Username</string>
     <string name="password">Password</string>
 
-    <string name="request_a_truck">Request A Truck</string>
-    <string name="from">FROM</string>
-    <string name="to">TO</string>
-    <string name="schedule">SCHEDULE</string>
-    <string name="expected_price">EXPECTED PRICE</string>
-    <string name="material">MATERIAL</string>
-    <string name="material_weight">MATERIAL WEIGHT</string>
-    <string name="truck_type">TRUCK TYPE</string>
-    <string name="payment_mode">PAYMENT MODE</string>
+    <string name="pickup_date">Pickup Date</string>
+    <string name="payment_terms">Payment Terms</string>
+    <string name="confirm_n_pay">CONFIRM AND PAY</string>
+
 
 </resources>

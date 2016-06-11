@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.android.shipoya.shipoya.HomepageActivity"
+    tools:context="com.android.shipoya.shipoya2.HomepageActivity"
     tools:showIn="@layout/app_bar_homepage">
 
     <GridLayout
