@@ -1,91 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.android.shipoya.shipoya2.GetTruckActivity"
-    tools:showIn="@layout/activity_get_truck"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
+    android:paddingEnd="10dp"
     android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:paddingStart="10dp"
-    android:paddingRight="30dp"
-    android:paddingEnd="30dp">
-
+    android:paddingTop="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.android.shipoya.shipoya2.GetTruckActivity"
+    tools:showIn="@layout/activity_get_truck">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
         android:id="@+id/linearLayout">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/from"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
 
-            <AutoCompleteTextView
+        <LinearLayout
+            android:id="@+id/linearLayout11"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/autoCompleteTextView"
-                style="@style/style_request_truck"/>
-        </android.support.design.widget.TextInputLayout>
+
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/from"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/FromAutocomplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/to"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/ToAutocomplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:completionThreshold="1"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:onClick="exchangeOnClick"
+            android:src="@drawable/ic_import_export_white_24dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout2">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/to"
-            android:textColor="@android:color/white"
-            android:textSize="15sp" />
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/autoCompleteTextView2"
-                style="@style/style_request_truck"/>
-
-        </android.support.design.widget.TextInputLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout2"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout3"
+        android:layout_marginBottom="10dp"
         android:baselineAligned="false"
-        android:layout_marginBottom="10dp">
+        android:orientation="horizontal">
+
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/scheduleContainer"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="scheduleOnClick"
-            android:layout_height="match_parent">
+            android:orientation="vertical"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -95,6 +113,7 @@
                 android:textSize="15sp" />
 
             <include layout="@layout/request_truck_schedule_text" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -103,11 +122,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
             android:id="@+id/expected_price_container"
-            android:layout_weight="1.1">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,33 +138,34 @@
                 android:textSize="15sp" />
 
             <EditText
+                android:id="@+id/expected_price"
+                style="@style/style_request_truck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:id="@+id/expected_price"
-                android:drawableLeft="@drawable/rupee_indian"
-                android:drawableStart="@drawable/rupee_indian"
-                style="@style/style_request_truck" />
+                android:drawableLeft="@drawable/rupee_white16"
+                android:drawableStart="@drawable/rupee_white16"
+                android:inputType="numberDecimal" />
         </LinearLayout>
     </LinearLayout>
 
-       <LinearLayout
-        android:orientation="horizontal"
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout3"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout4"
-           android:baselineAligned="false"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
             android:id="@+id/materialContainer"
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_height="match_parent">
-
+            android:orientation="vertical"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp">
 
 
             <TextView
@@ -154,20 +176,22 @@
                 android:textSize="15sp" />
 
             <AutoCompleteTextView
+                android:id="@+id/material"
+                style="@style/style_request_truck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/material"
-                android:drawableLeft="@drawable/ic_view_module_white_24dp"
-                android:drawableStart="@drawable/ic_view_module_white_24dp"
-                style="@style/style_request_truck"/>
+                android:drawableLeft="@drawable/ic_view_module_white_24px"
+                android:drawableStart="@drawable/ic_view_module_white_24px" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
             android:id="@+id/material_weight_container"
-            android:layout_weight="1.1">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -175,31 +199,36 @@
                 android:text="@string/material_weight"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
+
             <EditText
+                android:id="@+id/material_weight"
+                style="@style/style_request_truck"
+                android:text="MT"
+                android:textAlignment="textEnd"
+                android:layout_gravity="end"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="numberDecimal"
-                android:id="@+id/material_weight"
-                style="@style/style_request_truck" />
+                android:inputType="numberDecimal" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout4"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:baselineAligned="false"
-        android:id="@+id/linearLayout5">
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
             android:id="@+id/truck_type_container"
-            android:layout_weight="1.6">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.3"
+            android:orientation="vertical"
+            android:onClick="onTruckTypeClick">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -209,6 +238,7 @@
                 android:textSize="15sp" />
 
             <include layout="@layout/truck_type_field_layout" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -217,23 +247,26 @@
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_height="wrap_content"
-            android:layout_width="0dp"
             android:id="@+id/numberPicker_container"
-            android:layout_weight="1">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <include layout="@layout/crossnumber" />
+            <include
+                android:id="@+id/crossNumber_container"
+                layout="@layout/crossnumber" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout5"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:onClick="onPaymentTypeClick"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -251,16 +284,15 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="130dp"
         android:layout_height="35dp"
-        android:text="@string/get_truck"
-        android:id="@+id/button"
-        android:elevation="40dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="80dp"
-        android:backgroundTint="@color/colorAccent"
-        android:background="@color/colorAccent"
         android:layout_below="@+id/linearLayout6"
         android:layout_centerHorizontal="true"
-        style="@style/style_request_truck"/>
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:text="@string/get_truck" />
 </RelativeLayout>

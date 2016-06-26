@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#FF5252</color>
+    <color name="colorPrimaryDark">#25000000</color>
     <color name="colorAccent">#FF5252</color>
 
     <color name="request_truck_appbar">#94748e</color>
     <color name="view_orders_appbar">#e7cbc9</color>
+    <color name="statusbar_color">#b9a2a1</color>
 
     <color name="app_bg">#eeeeee</color>
 	
@@ -13,5 +14,11 @@
     <color name="white">#fff</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="light_grey">#dbdbdb</color>
 
+    <color name="text_grey">#424242</color>
+    <color name="green">#4bc85a</color>
+    <color name="black">#000000</color>
+
+    <color name="blue">#2196F3</color>
 </resources>

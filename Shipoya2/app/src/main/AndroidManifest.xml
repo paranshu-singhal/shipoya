@@ -2,32 +2,112 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.android.shipoya.shipoya2">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+
     <application
+        android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".GetTruckActivity"
-            android:label="@string/request_a_truck"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_api_key" />
 
         <activity
-            android:name=".ViewOrdersActivity"
-            android:label="@string/title_activity_view_orders"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-
-        <activity android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <activity
+            android:name=".HomepageActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".GetTruckActivity"
+            android:label="@string/request_a_truck"
+            android:parentActivityName=".HomepageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ViewQuotesActivity"
+            android:label="@string/title_activity_view_quotes"
+            android:parentActivityName=".HomepageActivity"
+            android:theme="@style/NoActionBar" />
+
+        <activity
+            android:name=".ViewQuotesChildActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ViewOrdersActivity"
+            android:label="@string/title_activity_view_orders"
+            android:parentActivityName=".HomepageActivity"
+            android:theme="@style/NoActionBar" />
+
+        <activity
+            android:name=".ViewOrdersChildActivity"
+            android:theme="@style/NoActionBar" />
+
+        <activity
+            android:name=".ViewInvoiceActivity"
+            android:label="@string/title_activity_view_invoices"
+            android:parentActivityName=".HomepageActivity"
+            android:theme="@style/NoActionBar" />
+
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_my_profile"
+            android:parentActivityName=".HomepageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".ContactUsActivity"
+            android:label="@string/title_activity_contact_us"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.android.shipoya.shipoya2.MainActivity" />
+        </activity>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <category android:name="com.gnirt69.gcmexample" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".GCMPushReceiverService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".GCMRegistrationIntentService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+    </application>
 </manifest>

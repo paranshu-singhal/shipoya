@@ -6,11 +6,18 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -25,18 +32,29 @@
 
     <style name="style_button">
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">@color/colorAccent</item>
+        <item name="android:background">?attr/colorPrimary</item>
         <item name="android:backgroundTint">@color/colorAccent</item>
         <item name="android:textAllCaps">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:width">150dp</item>
+        <item name="android:buttonStyle">?android:attr/buttonStyleSmall</item>
     </style>
 
     <style name="style_text_homepage">
         <item name="android:textColor">@color/colorAccent</item>
-        <item name="android:textSize">15dp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
-
     </style>
+
+    <style name="style_editText">
+        <item name="android:textColor">@color/text_grey</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">6dp</item>
+    </style>
+
+    <style name="NoActionBar" parent="AppTheme.NoActionBar">
+        <item name="android:colorPrimaryDark">@color/statusbar_color</item>
+    </style>
+
 
 </resources>

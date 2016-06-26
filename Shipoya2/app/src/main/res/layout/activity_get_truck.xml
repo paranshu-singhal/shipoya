@@ -8,12 +8,13 @@
     android:fitsSystemWindows="true"
     android:nestedScrollingEnabled="true"
     android:fadeScrollbars="true"
-    android:background="@drawable/request_truck_bg"
+    android:background="@drawable/request_a_truck_bg"
     tools:context="com.android.shipoya.shipoya2.GetTruckActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/app_bar"
         android:background="@color/request_truck_appbar"
         android:backgroundTint="@color/request_truck_appbar"
         android:theme="@style/AppTheme.AppBarOverlay">

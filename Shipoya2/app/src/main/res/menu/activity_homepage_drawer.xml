@@ -5,7 +5,7 @@
         <item
             android:id="@+id/item1"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/home" />
+            android:title="@string/about_us" />
         <item
             android:id="@+id/item2"
             android:icon="@drawable/ic_local_shipping_black_24dp"
@@ -21,16 +21,20 @@
 
         <item
             android:id="@+id/item5"
-            android:icon="@drawable/ic_payment_black_24dp"
+            android:icon="@drawable/ic_credit_card_black_24dp"
             android:title="@string/view_invoices_1" />
         <item
             android:id="@+id/item6"
             android:icon="@drawable/ic_call_black_24dp"
             android:title="@string/contact_us" />
-
         <item
             android:id="@+id/item7"
-            android:icon="@drawable/ic_arrow_upward_black_24dp"
+            android:title="@string/legal"
+            android:icon="@drawable/weight_balance" />
+
+        <item
+            android:id="@+id/item8"
+            android:icon="@drawable/logout"
             android:title="@string/logout" />
     </group>
 </menu>
