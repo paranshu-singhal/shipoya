@@ -49,15 +49,16 @@ public class ViewOrdersChildHolderClass {
     }
 
     public static class ChildHolderClass{
-        private String startTime, eta, curr_location;
+        private String eta, curr_location;
+        private Long startTime;
 
-        public ChildHolderClass(String startTime, String eta, String curr_location) {
+        public ChildHolderClass(Long startTime, String eta, String curr_location) {
             this.startTime = startTime;
             this.eta = eta;
             this.curr_location = curr_location;
         }
 
-        public String getStartTime() {
+        public Long getStartTime() {
             return startTime;
         }
 

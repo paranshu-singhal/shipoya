@@ -81,11 +81,11 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
         order_id_2 = obj.getOrderId();
         holder.order_id.setText(order_id_2);
 
-        DateFormat dateOriginal = new SimpleDateFormat("d MM yyyy", Locale.ENGLISH);
-        DateFormat dateFinal1 = new SimpleDateFormat("EEE, MMM d");
-        DateFormat dateFinal2 = new SimpleDateFormat("yyyy");
+        //DateFormat dateOriginal = new SimpleDateFormat("S", Locale.ENGLISH);
+        DateFormat dateFinal1 = new SimpleDateFormat("EEE, MMM d", Locale.ENGLISH);
+        DateFormat dateFinal2 = new SimpleDateFormat("yyyy", Locale.ENGLISH);
         try {
-            Date date = dateOriginal.parse(obj.getDate());
+            Date date = new Date(obj.getDate());
             holder.date.setText(dateFinal1.format(date));
             holder.yr.setText(dateFinal2.format(date));
         }

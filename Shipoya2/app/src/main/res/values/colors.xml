@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#FF5252</color>
-    <color name="colorPrimaryDark">#25000000</color>
+    <color name="colorPrimaryDark">#FF5252</color>
     <color name="colorAccent">#FF5252</color>
+    <color name="red">#F00</color>
 
     <color name="request_truck_appbar">#94748e</color>
     <color name="view_orders_appbar">#e7cbc9</color>

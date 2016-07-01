@@ -35,8 +35,10 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toEndOf="@id/profile_image"
                 android:layout_toRightOf="@id/profile_image"
+                android:layout_toLeftOf="@+id/textView23"
+                android:layout_toStartOf="@+id/textView23"
                 android:text="Carrier Name"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <TextView
@@ -48,15 +50,9 @@
                 android:layout_alignParentTop="true"
                 android:text="275000"
                 android:textSize="20sp"
+                android:drawableLeft="@drawable/rupee_black24"
+                android:drawableStart="@drawable/rupee_black24"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="0dp"
-                android:layout_toLeftOf="@id/textView23"
-                android:layout_toStartOf="@id/textView23"
-                android:src="@drawable/rupee_black24" />
 
         </RelativeLayout>
 

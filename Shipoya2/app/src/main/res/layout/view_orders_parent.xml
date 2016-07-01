@@ -9,7 +9,6 @@
     android:layout_marginRight="5dp"
     android:layout_marginTop="5dp"
     app:cardBackgroundColor="@color/white"
-    android:background="@android:drawable/list_selector_background"
     android:transitionName="@string/view_orders_transition"
     app:cardElevation="8dp"
     app:contentPadding="16dp"

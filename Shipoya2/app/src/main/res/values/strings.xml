@@ -28,6 +28,7 @@
 
 
     <string name="enter_phone">Enter your Phone Number</string>
+    <string name="phone_number">Phone Number</string>
     <string name="sign_up">SIGN UP</string>
     <string name="already_user">Already a user ?</string>
     <string name="login">LOGIN</string>
@@ -78,8 +79,10 @@
 
     <string name="text_error">This field cannot be empty</string>
     <string name="number_error">Please enter a valid mobile number</string>
-    <string name="submit">SUBMIT</string>
+    <string name="greater_than_zero_error">This field should be greater than zero</string>
+    <string name="src_dest_same_error">Source and Destination cannot be same</string>
 
+    <string name="submit">SUBMIT</string>
     <string name="view_quotes_transition">ab37jdbc</string>
     <string name="view_orders_transition">ndns6dsd6ds</string>
 
@@ -108,10 +111,39 @@
     <string name="curr_location">Current Location</string>
     <string name="error_image">Error occurred in Image Upload</string>
 
+    <string name="source">Source</string>
+    <string name="destination">Destination</string>
+
     <string name="phone_shipoya"><u>+91 999 625 1075</u></string>
     <string name="email_shipoya"><u>enquiry@shipoya.com</u></string>
     <string name="address_shipoya">21, HSIDC, Maruti udyog vihar, Gurgaon, Haryana </string>
+    <string name="order_confirmation">Order Confirmation</string>
+    <string name="invoice_generated">An invoice has been against your request for payment collection.</string>
+    <string name="invalid_pp">Invalid phone or password</string>
 
+    <string-array name="payment_type_1">
+        <item>90% Cash Advance</item>
+        <item>80% Cash Advance</item>
+        <item>70% Cash Advance</item>
+        <item>50% Cash Advance</item>
+        <item>20% Cash Advance</item>
+    </string-array>
 
-    
+    <string-array name="payment_type_2">
+        <item>Cash</item>
+        <item>NEFT</item>
+        <item>E-Wallet</item>
+    </string-array>
+    <string-array name="truck_type_1">
+        <item>Trailers - 10 Axle Trailer</item>
+        <item>Trucks 25 - Tons Taurus</item>
+        <item>Canters - Canters 4.5MT 4 Wheel</item>
+        <item>Containers - 32 Feet (14 Ton)</item>
+    </string-array>
+    <string-array name="truck_type_2">
+        <item>Open Body</item>
+        <item>Closed Body</item>
+        <item>Flat Bed</item>
+    </string-array>
+
 </resources>

@@ -5,9 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:nestedScrollingEnabled="true"
-    android:fadeScrollbars="true"
+    android:fitsSystemWindows="true"
     android:background="@drawable/request_a_truck_bg"
     tools:context="com.android.shipoya.shipoya2.GetTruckActivity">
 

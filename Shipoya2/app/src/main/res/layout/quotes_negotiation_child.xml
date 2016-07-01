@@ -8,7 +8,7 @@
     android:layout_marginRight="5dp"
     app:cardBackgroundColor="@color/white"
     android:layout_marginBottom="5dp"
-    app:cardElevation="6dp">
+    app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +16,13 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_gravity="center_horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/prpfile_image"
+                android:id="@+id/profile_image"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/sidebar_bg"
@@ -31,11 +30,16 @@
                 app:civ_border_width="1dp" />
 
             <LinearLayout
+                android:id="@+id/linearLayout6"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
                 android:layout_marginStart="6dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/profile_image"
+                android:layout_toEndOf="@+id/profile_image"
+                android:layout_toLeftOf="@+id/linearLayout7"
+                android:layout_toStartOf="@+id/linearLayout7">
 
                 <TextView
                     android:id="@+id/textView10"
@@ -54,31 +58,24 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/linearLayout7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="right|end"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                android:orientation="vertical"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true">
 
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/rupee_black16"
-                        android:layout_marginTop="5dp"/>
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Price"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textSize="18sp" />
-
-                </LinearLayout>
+                    android:textSize="18sp"
+                    android:drawableStart="@drawable/rupee_black16"
+                    android:drawableLeft="@drawable/rupee_black16"/>
 
                 <TextView
                     android:id="@+id/textView13"
@@ -87,7 +84,7 @@
                     android:text="Status"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -102,7 +99,6 @@
                 android:minWidth="120dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginRight="20dp"
-                android:elevation="8dp"
                 android:text="@string/confirm"
                 android:layout_gravity="center_horizontal"
                 style="@style/Widget.AppCompat.Button.Colored"/>
@@ -112,7 +108,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minWidth="120dp"
-                android:elevation="8dp"
                 android:text="@string/negotiate"
                 android:layout_gravity="center_horizontal"
                 style="@style/Widget.AppCompat.Button.Colored"/>

@@ -18,12 +18,14 @@ public class OrdersPagerAdapter extends PagerAdapter {
 
 
     String[] arr = new String[3];
+    List<OrderParent> parents;
 
-    public OrdersPagerAdapter(Context context) {
+    public OrdersPagerAdapter(Context context, List<OrderParent> parents) {
         this.context = context;
         arr[0] = context.getResources().getString(R.string.scheduled);
         arr[1] = context.getResources().getString(R.string.in_transit);
         arr[2] = context.getResources().getString(R.string.delivered);
+        this.parents = parents;
     }
 
 
@@ -36,10 +38,6 @@ public class OrdersPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.view_orders_pager_fragment,container,false);
-
-        OrderParent parent = new OrderParent("DEL", "MUM","order id", "date");
-        OrderParent parent1 = new OrderParent("DEL","MUM","order id1", "date1");
-        List<OrderParent> parents = Arrays.asList(parent, parent1);
 
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewInvoices);
         mRecyclerView.setHasFixedSize(true);

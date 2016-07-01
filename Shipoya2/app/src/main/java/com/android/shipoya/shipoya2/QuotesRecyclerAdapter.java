@@ -24,9 +24,9 @@ public class QuotesRecyclerAdapter extends RecyclerView.Adapter<QuotesRecyclerAd
 
 
     Context context;
-    List<QuoteParent> parentList;
+    List<OrderParent> parentList;
 
-    public QuotesRecyclerAdapter(Context context, List<QuoteParent> parentList) {
+    public QuotesRecyclerAdapter(Context context, List<OrderParent> parentList) {
         this.context = context;
         this.parentList = parentList;
     }
@@ -75,18 +75,16 @@ public class QuotesRecyclerAdapter extends RecyclerView.Adapter<QuotesRecyclerAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        QuoteParent obj = parentList.get(position);
+        OrderParent obj = parentList.get(position);
         holder.src.setText(obj.getFrom());
         holder.dest.setText(obj.getTo());
         holder.order_id.setText(obj.getOrderId());
 
-        DateFormat dateOriginal = new SimpleDateFormat("d MM yyyy", Locale.ENGLISH);
         DateFormat dateFinal1 = new SimpleDateFormat("EEE, MMM d");
         DateFormat dateFinal2 = new SimpleDateFormat("yyyy");
         try {
-            Date date = dateOriginal.parse(obj.getDate());
-            holder.date.setText(dateFinal1.format(date));
-            holder.yr.setText(dateFinal2.format(date));
+            holder.date.setText(dateFinal1.format(new Date(obj.getDate())));
+            holder.yr.setText(dateFinal2.format(new Date(obj.getDate())));
         }
         catch (Throwable t){
             Log.d("logtag", t.getMessage());

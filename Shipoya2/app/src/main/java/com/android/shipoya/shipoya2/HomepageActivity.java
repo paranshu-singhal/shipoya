@@ -1,6 +1,8 @@
 package com.android.shipoya.shipoya2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +26,8 @@ public class HomepageActivity extends AppCompatActivity implements View.OnClickL
     Toolbar toolbar;
     DrawerLayout drawer;
     boolean doubleBackToExitPressedOnce = false;
+
+    private static final String logTag = "logTag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +46,13 @@ public class HomepageActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.viewOrders).setOnClickListener(this);
         findViewById(R.id.viewQuotes).setOnClickListener(this);
 
+        SharedPreferences sharedPref = getSharedPreferences("user_data",Context.MODE_PRIVATE);
+        ((TextView)findViewById(R.id.carr_name_home)).setText(sharedPref.getString("full_name", null));
+        ((TextView)findViewById(R.id.carr_type_home)).setText(sharedPref.getString("entity_type", null).toUpperCase());
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        ((TextView)navigationView.getHeaderView(0).findViewById(R.id.txt_carrName_navHeader)).setText(sharedPref.getString("full_name", null));
         navigationView.getHeaderView(0).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,6 +102,8 @@ public class HomepageActivity extends AppCompatActivity implements View.OnClickL
         }
         startActivity(i);
     }
+
+
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

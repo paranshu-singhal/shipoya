@@ -2,7 +2,8 @@ package com.android.shipoya.shipoya2;
 public class OrderParent {
 
 
-    private String from, to, orderId, date;
+    private String from, to, orderId;
+    private Long date;
 
     public String getFrom() {
         return from;
@@ -12,7 +13,7 @@ public class OrderParent {
         return to;
     }
 
-    public String getDate() {
+    public Long getDate() {
         return date;
     }
 
@@ -20,7 +21,7 @@ public class OrderParent {
         return orderId;
     }
 
-    public  OrderParent(String from, String to, String orderId, String date) {
+    public  OrderParent(String from, String to, String orderId, Long date) {
         this.from = from;
         this.to = to;
         this.orderId = orderId;

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,7 +29,8 @@ public class LoginPageFragment extends Fragment {
 
         EditText text1 = (EditText)v.findViewById(R.id.editText1);
         EditText text2 = (EditText)v.findViewById(R.id.editText2);
-        mListener.onFragmentInteraction(text1, text2);
+        Button btn = (Button)v.findViewById(R.id.button) ;
+        mListener.onFragmentInteraction(text1, text2, btn);
         return v;
     }
 
@@ -49,6 +51,6 @@ public class LoginPageFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(EditText username, EditText password);
+        void onFragmentInteraction(EditText username, EditText password, Button btnLogin);
     }
 }

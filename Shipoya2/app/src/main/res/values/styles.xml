@@ -6,17 +6,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+        </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
@@ -52,9 +48,6 @@
         <item name="android:paddingTop">6dp</item>
     </style>
 
-    <style name="NoActionBar" parent="AppTheme.NoActionBar">
-        <item name="android:colorPrimaryDark">@color/statusbar_color</item>
-    </style>
 
 
 </resources>

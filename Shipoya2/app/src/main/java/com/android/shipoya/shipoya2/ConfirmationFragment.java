@@ -1,9 +1,11 @@
 package com.android.shipoya.shipoya2;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +33,17 @@ public class ConfirmationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.quotes_confirmation, container, false);
-        TextView carr_name = (TextView)v.findViewById(R.id.textView24);
+        final TextView carr_name = (TextView)v.findViewById(R.id.textView24);
         TextView money = (TextView)v.findViewById(R.id.textView23);
-        TextView pick_date = (TextView)v.findViewById(R.id.textView26);
+        final TextView pick_date = (TextView)v.findViewById(R.id.textView26);
         TextView payment_terms = (TextView)v.findViewById(R.id.textView28);
+
+        (v.findViewById(R.id.button5)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show_confirmDialog(carr_name.getText().toString(), pick_date.getText().toString());
+            }
+        });
 
         carr_name.setText(holder.getCarr_name());
         money.setText(holder.getMoney());
@@ -62,5 +71,16 @@ public class ConfirmationFragment extends Fragment {
 
     public interface OnConfirmationFragmentInteractionListener {
         void onConfirmationFragmentInteraction(Uri uri);
+    }
+
+    public void show_confirmDialog(String carr_name, String date){
+
+        QuoteConfirmedDialog dialog = new QuoteConfirmedDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString("carr_name", carr_name);
+        bundle.putString("date", date);
+        dialog.setArguments(bundle);
+        FragmentManager fm = getActivity().getFragmentManager();
+        dialog.show(fm, "tag");
     }
 }

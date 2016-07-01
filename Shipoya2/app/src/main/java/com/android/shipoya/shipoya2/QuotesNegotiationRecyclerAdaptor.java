@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ public class QuotesNegotiationRecyclerAdaptor extends RecyclerView.Adapter<Quote
 
     Context ctx;
     List<Quotes_Negotiation_Holder> list;
+    TextView carr_name, status, rating, price;
 
     public QuotesNegotiationRecyclerAdaptor(Context ctx, List<Quotes_Negotiation_Holder> list) {
         this.ctx = ctx;
@@ -25,9 +27,9 @@ public class QuotesNegotiationRecyclerAdaptor extends RecyclerView.Adapter<Quote
     }
 
     public class viewHolder extends RecyclerView.ViewHolder{
-        TextView carr_name, status, rating, price;
+
         ImageView profile;
-        Button confirm, negotiate;
+
 
         public viewHolder(View itemView) {
             super(itemView);
@@ -36,8 +38,13 @@ public class QuotesNegotiationRecyclerAdaptor extends RecyclerView.Adapter<Quote
             status = (TextView)itemView.findViewById(R.id.textView13);
             price = (TextView)itemView.findViewById(R.id.textView12);
             profile = (ImageView)itemView.findViewById(R.id.profile_image);
-            negotiate = (Button)itemView.findViewById(R.id.button9);
-            negotiate.setOnClickListener(new View.OnClickListener() {
+            (itemView.findViewById(R.id.button8)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
+            (itemView.findViewById(R.id.button9)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showNegotiaterDialog();
@@ -76,7 +83,18 @@ public class QuotesNegotiationRecyclerAdaptor extends RecyclerView.Adapter<Quote
 
     public void showNegotiaterDialog(){
         NegotiatorDialog dialog = new NegotiatorDialog();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("carr_name", carr_name.getText().toString());
+        bundle.putString("status",status.getText().toString());
+        bundle.putString("price", price.getText().toString());
+        bundle.putString("rating",rating.getText().toString());
+        bundle.putString("img_link","");
+        dialog.setArguments(bundle);
+
         FragmentManager fm = ((Activity)ctx).getFragmentManager();
         dialog.show(fm, "tag");
     }
+
+
 }

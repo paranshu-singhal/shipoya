@@ -1,0 +1,49 @@
+{
+  "message": "retrieved 1 object(s)",
+  "data": {
+    "selected_carriers": [
+      {
+        "carrier_entity_name": "Safe Express",
+        "carrier_id": "clESY4gty9UD4xb6vjA3mFyh"
+      }
+    ],
+    "shipper_contact": {
+      "contact_name": {
+        "first_name": "Akhil",
+        "last_name": "Vasudev"
+      },
+      "contact_email": "akhil@gmail.com",
+      "contact_mobile": {
+        "phone_number": "9871104770",
+        "phone_type": "mobile"
+      }
+    },
+    "primary_office": {
+      "primary_phone": {
+        "phone_number": "55291375",
+        "phone_type": "fixed",
+        "area_code": "022"
+      },
+      "office_address": {
+        "city": "Gurgaon",
+        "area": "Sector 67",
+        "country": "India",
+        "line1": "609b, Akbar road",
+        "state": "Delhi NCR",
+        "zip_code": "122044"
+      }
+    },
+    "service_tax_num": "MMF33294JDF",
+    "shipper_id": "sleogtGRBBYKgWPEGcU4f4D4",
+    "setup_year": 2002.0,
+    "date_added": "2016-06-22T14:19:02",
+    "shipper_entity_name": "Safe Express",
+    "shipper_pan_num": "BIMP43078K",
+    "shipper_status": "active",
+    "shipper_logo": "http://logonoid.com/images/itc-logo.png",
+    "about_us": "dude we are good people",
+    "shipper_regd_name": "Safe Express Pvt Ltd"
+  },
+  "http_code": 200,
+  "success": true
+}

@@ -12,7 +12,11 @@ import com.bignerdranch.expandablerecyclerview.Model.ParentListItem;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ChildViewHolder;
 import com.bignerdranch.expandablerecyclerview.ViewHolder.ParentViewHolder;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ViewOrdersChildAdaptor extends ExpandableRecyclerAdapter<ViewOrdersChildAdaptor.parentViewHolder, ViewOrdersChildAdaptor.childViewHolder> {
 
@@ -47,6 +51,8 @@ public class ViewOrdersChildAdaptor extends ExpandableRecyclerAdapter<ViewOrders
     public class childViewHolder extends ChildViewHolder{
 
         TextView startTime, currLoc,eta;
+        DateFormat dateFinal1 = new SimpleDateFormat("H:ma, d MMM yyyy", Locale.ENGLISH);
+
         public childViewHolder(View itemView) {
             super(itemView);
             startTime = (TextView)itemView.findViewById(R.id.startTime);
@@ -54,7 +60,7 @@ public class ViewOrdersChildAdaptor extends ExpandableRecyclerAdapter<ViewOrders
             eta = (TextView)itemView.findViewById(R.id.estimatedTime);
         }
         public void bind(ViewOrdersChildHolderClass.ChildHolderClass obj){
-            startTime.setText(obj.getStartTime());
+            startTime.setText(dateFinal1.format(new Date(obj.getStartTime())));
             currLoc.setText(obj.getCurr_location());
             eta.setText(obj.getEta());
         }

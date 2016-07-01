@@ -9,22 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
-import java.util.Arrays;
 import java.util.List;
-
-/**
- * Created by aaaa on 6/13/2016.
- */
 
 public class QuotesPagerAdapter extends PagerAdapter {
 
     Context context;
     String[] title;
+    List<OrderParent> parents;
 
-    public QuotesPagerAdapter(Context context) {
+    public QuotesPagerAdapter(Context context, List<OrderParent> parents) {
         this.context = context;
         title = new String[]{"ALL","NEGOTIATED","CONFIRMED"};
+        this.parents = parents;
     }
 
 
@@ -37,9 +33,7 @@ public class QuotesPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.pager_fragment_layout, container, false);
-        QuoteParent parent = new QuoteParent("DEL", "MUM", "12345", "21 08 1994");
-        QuoteParent parent1 = new QuoteParent("MUM", "DEL", "23456", "23 08 1994");
-        List<QuoteParent> parents = Arrays.asList(parent, parent1);
+
 
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
