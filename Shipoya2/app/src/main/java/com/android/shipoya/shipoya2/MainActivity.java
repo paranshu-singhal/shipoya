@@ -1,5 +1,6 @@
 package com.android.shipoya.shipoya2;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -216,15 +217,19 @@ public class MainActivity extends AppCompatActivity implements EnterPhoneNumberF
     public class load extends AsyncTask<Void, Void, String> {
 
         String username, password;
-
+        ProgressDialog dialog;
         public load(String username, String password) {
             this.username = username;
             this.password = password;
         }
 
         @Override
-        protected String doInBackground(Void... voids) {
+        protected void onPreExecute() {
+            dialog = ProgressDialog.show(MainActivity.this, "", getResources().getString(R.string.loading_wait), true);
+        }
 
+        @Override
+        protected String doInBackground(Void... voids) {
             StringBuilder buffer = null;
             try {
                 HttpsURLConnection conn = (HttpsURLConnection) (new URL("https://www.shipoya.com/auth_resources/api/user_login")).openConnection();
@@ -277,11 +282,13 @@ public class MainActivity extends AppCompatActivity implements EnterPhoneNumberF
 
         @Override
         protected void onPostExecute(String s) {
+            dialog.dismiss();
             try {
                 JSONObject obj = new JSONObject(s);
                 if (obj.getBoolean("success")) {
                     SharedPreferences sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
+                    Log.d(logTag, obj.getJSONObject("user_data").getString("entity_id"));
                     editor.putString("entity_id", obj.getJSONObject("user_data").getString("entity_id"));
                     editor.putString("full_name", obj.getJSONObject("user_data").getString("full_name"));
                     editor.putString("entity_type", obj.getJSONObject("user_data").getString("entity_type"));
@@ -299,6 +306,14 @@ public class MainActivity extends AppCompatActivity implements EnterPhoneNumberF
     }
 
     public class loadOrderData extends AsyncTask<Void, Void, String> {
+
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = ProgressDialog.show(MainActivity.this, "", getResources().getString(R.string.loading_wait), true);
+        }
+
         @Override
         protected String doInBackground(Void... params) {
             StringBuilder buffer = null;
@@ -337,6 +352,7 @@ public class MainActivity extends AppCompatActivity implements EnterPhoneNumberF
 
         @Override
         protected void onPostExecute(String s) {
+
             try {
                 if (response_code_1 == 200 && response_code_2==200 && s!=null) {
 
@@ -349,6 +365,7 @@ public class MainActivity extends AppCompatActivity implements EnterPhoneNumberF
                         ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(), "ordersCache")));
                         oos.writeObject(s);
                     }
+                    dialog.dismiss();
                     Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);

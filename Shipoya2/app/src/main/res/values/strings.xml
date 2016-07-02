@@ -55,6 +55,7 @@
     <string name="notification">Notification</string>
     <string name="search">Search</string>
     <string name="welcome">Welcome</string>
+    <string name="shipper">Shipper</string>
 
     <string name="home">Home</string>
 
@@ -145,5 +146,9 @@
         <item>Closed Body</item>
         <item>Flat Bed</item>
     </string-array>
+
+    <string name="loading_wait">Loading. Please wait...</string>
+    <string name="confirm_sure">Are you sure you want to confirm?</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

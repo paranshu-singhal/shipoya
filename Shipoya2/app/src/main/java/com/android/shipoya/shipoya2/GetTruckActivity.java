@@ -1,5 +1,6 @@
 package com.android.shipoya.shipoya2;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -365,6 +366,12 @@ public class GetTruckActivity extends AppCompatActivity implements
 
     public class uploadServer extends AsyncTask<Void, Void, String> {
 
+        ProgressDialog dialog;
+        @Override
+        protected void onPreExecute() {
+            dialog = ProgressDialog.show(GetTruckActivity.this, "", getResources().getString(R.string.loading_wait), true);
+        }
+
         SharedPreferences sharedPref = getSharedPreferences("cookie", Context.MODE_PRIVATE);
 
         @Override
@@ -409,6 +416,8 @@ public class GetTruckActivity extends AppCompatActivity implements
 
         @Override
         protected void onPostExecute(String s) {
+            dialog.dismiss();
+
             try {
                 JSONObject object = new JSONObject(s);
                 Toast.makeText(GetTruckActivity.this, object.getString("message"), Toast.LENGTH_LONG).show();

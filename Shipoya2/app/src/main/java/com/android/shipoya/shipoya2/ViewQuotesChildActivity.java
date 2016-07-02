@@ -116,7 +116,9 @@ public class ViewQuotesChildActivity extends AppCompatActivity implements CardVi
                                 bid.getString("quote_amount"),
                                 (bid.getString("quote_count").equals("latest quote")) ? "Negotiated" : "New Quote",
                                 "", //img link
-                                2
+                                2,
+                                bid.getString("bid_id"),
+                                obj.getString("order_id")
                         ));
                     }
 
