@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_side_margin">0dp</dimen>
+    <dimen name="card_zero_margin">-3dp</dimen>
+    <dimen name="card_bottom_margin_invoice">-8dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_child_margin">-8dp</dimen>
+</resources>

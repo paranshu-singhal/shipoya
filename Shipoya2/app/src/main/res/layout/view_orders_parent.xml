@@ -1,94 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<GridLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container_cardView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:padding="@dimen/activity_horizontal_margin">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/card_side_margin"
+    android:layout_marginRight="@dimen/card_side_margin"
+    android:layout_marginTop="@dimen/card_zero_margin"
+    android:layout_marginBottom="@dimen/card_zero_margin"
+    app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="false"
+    android:transitionName="@string/view_orders_transition"
+    app:cardPreventCornerOverlap="false"
+    app:cardElevation="@dimen/card_elevation"
+    app:contentPadding="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_column="0">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="2017"
-            android:textSize="12sp"
-            android:id="@+id/textView10"
-            android:textColor="@android:color/black"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Fri, Apr 13"
-            android:textSize="23sp"
-            android:id="@+id/textView11"
-            android:textColor="@android:color/black"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_column="2">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Order id: 234567"
-            android:textSize="12sp"
-            android:id="@+id/textView12"
-            android:textColor="@android:color/black"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="DEL"
-                android:textSize="23sp"
-                android:id="@+id/textView13"
-                android:textColor="@android:color/black"/>
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_arrow_forward_black_24dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"/>
+                android:text="2017"
+                android:textSize="12sp" />
 
             <TextView
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="MUM"
-                android:textSize="23sp"
-                android:id="@+id/textView14"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:textColor="@android:color/black"/>
+                android:text="Fri, Apr 13"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order id:  "
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/orderId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="234567"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_expand_more_black_18dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp" />
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DEL"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_trending_flat_black_24dp" />
+
+                <TextView
+                    android:id="@+id/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="MUM"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/expandIndicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|end|center_vertical"
+                    android:src="@drawable/ic_expand_more_black_24dp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</GridLayout>
+</android.support.v7.widget.CardView>

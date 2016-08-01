@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "678411815171",
+    "project_id": "shipoya-e3b88"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678411815171:android:80c0bddbb9f3e64a",
+        "android_client_info": {
+          "package_name": "com.android.shipoya.shipoya2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArcU-BUwpBt3BbTrOwTa2eyWa-9yYD_9w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

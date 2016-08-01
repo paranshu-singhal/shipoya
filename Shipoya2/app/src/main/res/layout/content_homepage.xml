@@ -1,148 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:padding="8dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.android.shipoya.shipoya2.HomepageActivity"
-    tools:showIn="@layout/app_bar_homepage">
+    tools:context="com.android.shipoya.shipoya2.HomepageActivity">
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/getTruck"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
             android:background="@color/dark_grey"
-            android:padding="16dp"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:elevation="10dp">
+            android:elevation="6dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/imageView1"
-                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:src="@drawable/ic_local_shipping_white_48dp"/>
+                android:layout_marginTop="13dp"
+                android:src="@drawable/ic_local_shipping_white_48dp" />
 
-            <Button
-                android:layout_width="120dp"
-                android:layout_height="35dp"
-                android:text="@string/get_truck"
-                android:textAppearance="@style/style_text_homepage"
+            <TextView
                 android:id="@+id/button1"
-                android:background="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_truck"
+                android:textSize="13sp"
                 android:textColor="@color/white"
-                android:clickable="true" />
+                android:background="@color/colorAccent"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:elevation="8dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/viewQuotes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
             android:background="@color/dark_grey"
-            android:padding="16dp"
-            android:layout_row="0"
-            android:layout_column="2"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:elevation="10dp">
+            android:elevation="6dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:onClick="onClickQuotes"
+            android:padding="16dp">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/imageView2"
-                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:src="@drawable/ic_receipt_white_48dp"/>
+                android:layout_marginTop="13dp"
+                android:src="@drawable/ic_receipt_white_48dp" />
 
-            <Button
-                android:layout_width="120dp"
-                android:layout_height="35dp"
-                android:text="@string/view_quotes"
-                android:textAppearance="@style/style_text_homepage"
+            <TextView
                 android:id="@+id/button2"
-                android:background="@color/colorAccent"
-                android:textColor="@color/white"
-                android:clickable="true" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/dark_grey"
-            android:layout_marginTop="15dp"
-            android:padding="16dp"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:elevation="10dp">
-
-            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/view_quotes"
+                android:textSize="13sp"
+                android:onClick="onClickQuotes"
+                android:textColor="@color/white"
+                android:background="@color/colorAccent"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:elevation="8dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/viewOrders"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@color/dark_grey"
+            android:elevation="6dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
                 android:id="@+id/imageView3"
-                android:layout_marginTop="13dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="3dp"
-                android:src="@drawable/ic_style_white_48dp"/>
+                android:layout_marginTop="13dp"
+                android:src="@drawable/ic_style_white_48dp" />
 
-            <Button
-                android:layout_width="120dp"
-                android:layout_height="35dp"
-                android:text="@string/view_orders"
-                android:textAppearance="@style/style_text_homepage"
+            <TextView
                 android:id="@+id/button3"
-                android:background="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/view_orders"
                 android:textColor="@color/white"
-                android:clickable="true" />
+                android:textSize="13sp"
+                android:background="@color/colorAccent"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:elevation="8dp"/>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/viewInvoices"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
             android:background="@color/dark_grey"
-            android:layout_marginTop="15dp"
-            android:padding="16dp"
-            android:layout_row="1"
-            android:layout_column="2"
-            android:clickable="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:elevation="10dp">
+            android:elevation="6dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <ImageView
+                android:id="@+id/imageView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView4"
-                android:layout_marginTop="13dp"
                 android:layout_marginBottom="3dp"
-                android:src="@drawable/ic_payment_white_48dp"/>
+                android:layout_marginTop="13dp"
+                android:src="@drawable/ic_credit_card_white_48dp" />
 
-            <Button
-                android:layout_width="120dp"
-                android:layout_height="35dp"
-                android:text="@string/view_invoices"
-                android:textAppearance="@style/style_text_homepage"
+            <TextView
                 android:id="@+id/button4"
-                android:background="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/view_invoices"
                 android:textColor="@color/white"
-                android:clickable="true" />
+                android:textSize="13sp"
+                android:background="@color/colorAccent"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:elevation="8dp"/>
         </LinearLayout>
-    </GridLayout>
 
-</RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

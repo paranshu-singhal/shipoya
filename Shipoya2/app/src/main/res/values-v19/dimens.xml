@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_side_margin">0dp</dimen>
+    <dimen name="card_zero_margin">-3dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
+    <dimen name="card_child_margin">-5dp</dimen>
+</resources>

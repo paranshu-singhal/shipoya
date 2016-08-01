@@ -6,15 +6,12 @@
     android:background="@drawable/login_bg"
     tools:context="com.android.shipoya.shipoya2.MainActivity">
 
-
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/main_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:orientation="vertical" />
 
-        <include layout="@layout/enter_phone_layout" />
-
-    </LinearLayout>
 </RelativeLayout>

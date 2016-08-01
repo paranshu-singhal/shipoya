@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingEnd="30dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="30dp"
+    android:paddingStart="10dp"
+    android:paddingTop="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.android.shipoya.shipoya2.GetTruckActivity"
+    tools:showIn="@layout/activity_get_truck">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/from"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
+            style="@style/style_request_truck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/to"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView2"
+            style="@style/style_request_truck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/scheduleContainer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:onClick="scheduleOnClick"
+            android:orientation="vertical"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/schedule"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <include layout="@layout/request_truck_schedule_text" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/expected_price_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/expected_price"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/expected_price"
+                style="@style/style_request_truck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/rupee_white16"
+                android:drawableStart="@drawable/rupee_white16"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/materialContainer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/material"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <AutoCompleteTextView
+                android:id="@+id/material"
+                style="@style/style_request_truck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_view_module_white_24dp"
+                android:drawableStart="@drawable/ic_view_module_white_24dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/material_weight_container"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/material_weight"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/material_weight"
+                style="@style/style_request_truck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/truck_type_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.6"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/truck_type"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
+
+            <include layout="@layout/truck_type_field_layout" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/numberPicker_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/crossNumber_container"
+                layout="@layout/crossnumber" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout5"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_mode"
+            android:textColor="@android:color/white"
+            android:textSize="15sp" />
+
+        <include layout="@layout/payment_mode_field_layout" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/white" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="130dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/linearLayout6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="40dp"
+        android:background="@color/colorAccent"
+        android:backgroundTint="@color/colorAccent"
+        android:elevation="40dp"
+        android:text="@string/get_truck" />
+</RelativeLayout>

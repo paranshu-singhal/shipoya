@@ -1,0 +1,51 @@
+{
+  "message": "here is your damn data",
+  "data": {
+    "auction_negotiations": [],
+    "load_negotiations": [
+      {
+        "order_details": {
+          "order_name": "fff",
+          "load_type": "Part Truck Load",
+          "destination": {
+            "city": " Bengaluru",
+            "state": " Karnataka",
+            "area": "Madiwala"
+          },
+          "truck_type": {
+            "truck_tonnage": "0-2 MT",
+            "truck_length": "0-9 feet",
+            "truck_type": "Trucks - 9 Tons Truck"
+          },
+          "consignment_weight": 16,
+          "source": {
+            "city": " Gurgaon",
+            "state": " Haryana",
+            "area": "Kherki Daula"
+          },
+          "order_id": "llSfReDFNcE62FkeM8AQMNqi",
+          "scheduled_on": 1468952481,
+          "quote_confirmed_shipper": false,
+          "material_type": "Coal and Ash"
+        },
+        "negotiation_details": {
+          "timestamp": "2016-07-21T15:07:55",
+          "shipper_price": 25800,
+          "bid_id": "blbk4rCMHmgc4hYLRWSUAnFP",
+          "user_id": "suntLUE9M8bhC4NB6PzzMe3W"
+        },
+        "bid_details": {
+          "quote_amount": 26000,
+          "carrier_rating": "nav",
+          "bid_id": "blbk4rCMHmgc4hYLRWSUAnFP",
+          "carrier_id": "clHFeJkR6ftfy5KprwoaWox6",
+          "load_id": "llSfReDFNcE62FkeM8AQMNqi",
+          "bid_timestamp": 1468953622,
+          "carrier_name": "OM Logistics"
+        }
+      }
+    ]
+  },
+  "http_code": 200,
+  "success": true
+}

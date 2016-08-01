@@ -10,6 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/appBar"
         android:background="@color/view_orders_appbar"
         android:backgroundTint="@color/view_orders_appbar"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -27,34 +28,37 @@
             android:background="@color/colorAccent"
             android:backgroundTint="@color/colorAccent"
             android:fillViewport="true"
-            app:tabGravity="center"
-            app:tabTextColor="@android:color/white"
-            app:tabMode="fixed">
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            app:tabTextColor="@android:color/white">
+
+
 
             <android.support.design.widget.TabItem
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/all"/>
+                android:layout_height="wrap_content"
+                android:text="@string/scheduled" />
+
             <android.support.design.widget.TabItem
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/scheduled"/>
+                android:layout_height="wrap_content"
+                android:text="@string/in_transit" />
             <android.support.design.widget.TabItem
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="@string/in_transit"/>
+                android:layout_height="wrap_content"
+                android:text="@string/delivered" />
         </android.support.design.widget.TabLayout>
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewOrders"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_bg"
-        android:backgroundTint="@color/app_bg"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-    </android.support.v7.widget.RecyclerView>
-
+        android:layout_gravity="bottom"
+        android:layout_marginTop="108dp"
+        android:animateLayoutChanges="true"
+        android:animationCache="true"
+        app:layout_anchor="@+id/appBar"
+        app:layout_anchorGravity="bottom" />
 </android.support.design.widget.CoordinatorLayout>

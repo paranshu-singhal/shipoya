@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF5252</color>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="colorPrimary">#F06423</color>
+    <color name="colorPrimaryDark">#cc4f23</color>
+    <color name="colorAccent">#F06423</color>
+    <color name="red">#F00</color>
 
-    <color name="request_truck_appbar">#94748e</color>
-    <color name="view_orders_appbar">#e7cbc9</color>
-
+    <color name="view_orders_appbar">#F06423</color>
     <color name="app_bg">#eeeeee</color>
 	
 	<color name="dark_grey">#666666</color>
     <color name="white">#fff</color>
 
     <color name="black_overlay">#66000000</color>
+    <color name="light_grey">#dbdbdb</color>
+
+    <color name="text_grey">#424242</color>
+    <color name="green">#4bc85a</color>
+    <color name="black">#000000</color>
+
+    <color name="blue">#2196F3</color>
+    <color name="yellow">#ffa000</color>
+    <color name="light_yello">#ffc107</color>
 
 </resources>

@@ -1,0 +1,87 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".VerifyOtpFragment">
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:text="9996251075"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/colorAccent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/otp_sent"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/white" />
+
+    <FrameLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/boundingbox"
+        android:orientation="horizontal"
+        android:paddingEnd="16dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingStart="30dp">
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:text="@string/waiting_otp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|center"
+            android:background="@drawable/round_bg"
+            android:gravity="center"
+            android:text="90"
+            android:textAlignment="center"
+            android:textSize="19sp"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:hint="@string/enter_manually"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white" />
+
+    <Button
+        android:id="@+id/button6"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:minWidth="120dp"
+        android:text="@string/verify"
+        android:textSize="17sp" />
+</LinearLayout>
