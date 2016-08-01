@@ -5,10 +5,10 @@ import android.os.Parcelable;
 
 public class Quotes_Negotiation_Holder implements Parcelable{
 
-    private String carr_name, money, status, img_link, bid_id, order_id;
+    private String carr_name, money, status, img_link, bid_id, order_id, payment_terms, pickup_date;
     private int rating;
 
-    public Quotes_Negotiation_Holder(String carr_name, String money, String status, String img_link, int rating, String bid_id, String order_id) {
+    public Quotes_Negotiation_Holder(String carr_name, String money, String status, String img_link, int rating, String bid_id, String order_id, String payment_terms, String pickup_date) {
         this.carr_name = carr_name;
         this.money = money;
         this.status = status;
@@ -16,6 +16,8 @@ public class Quotes_Negotiation_Holder implements Parcelable{
         this.rating = rating;
         this.bid_id=bid_id;
         this.order_id = order_id;
+        this.payment_terms = payment_terms;
+        this.pickup_date = pickup_date;
     }
 
     public Quotes_Negotiation_Holder(Parcel in) {
@@ -26,6 +28,8 @@ public class Quotes_Negotiation_Holder implements Parcelable{
         this.rating = in.readInt();
         this.bid_id = in.readString();
         this.order_id = in.readString();
+        this.payment_terms = in.readString();
+        this.pickup_date = in.readString();
     }
 
     public String getCarr_name() {
@@ -56,6 +60,14 @@ public class Quotes_Negotiation_Holder implements Parcelable{
         return order_id;
     }
 
+    public String getPayment_terms() {
+        return payment_terms;
+    }
+
+    public String getPickup_date() {
+        return pickup_date;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -70,6 +82,8 @@ public class Quotes_Negotiation_Holder implements Parcelable{
         dest.writeInt(rating);
         dest.writeString(bid_id);
         dest.writeString(order_id);
+        dest.writeString(pickup_date);
+        dest.writeString(payment_terms);
     }
 
     public static final Parcelable.Creator<Quotes_Negotiation_Holder> CREATOR = new Parcelable.Creator<Quotes_Negotiation_Holder>(){

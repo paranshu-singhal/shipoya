@@ -5,12 +5,15 @@
     android:id="@+id/container_cardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="5dp"
+    android:layout_marginLeft="@dimen/card_side_margin"
+    android:layout_marginRight="@dimen/card_side_margin"
+    android:layout_marginTop="@dimen/card_zero_margin"
+    android:layout_marginBottom="@dimen/card_zero_margin"
     app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="false"
     android:transitionName="@string/view_orders_transition"
-    app:cardElevation="8dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardElevation="@dimen/card_elevation"
     app:contentPadding="16dp"
     android:clickable="true"
     android:focusable="true"
@@ -19,7 +22,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:layout_width="0dp"

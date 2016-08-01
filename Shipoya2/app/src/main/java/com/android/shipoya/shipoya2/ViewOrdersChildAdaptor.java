@@ -70,12 +70,12 @@ public class ViewOrdersChildAdaptor extends ExpandableRecyclerAdapter<ViewOrders
 
     @Override
     public parentViewHolder onCreateParentViewHolder(ViewGroup parentViewGroup) {
-        return new parentViewHolder(inflater.inflate(R.layout.view_orders_child_parent, parentViewGroup, false));
+        return new parentViewHolder(inflater.inflate(R.layout.view_orders_child_parent1, parentViewGroup, false));
     }
 
     @Override
     public childViewHolder onCreateChildViewHolder(ViewGroup childViewGroup) {
-        return new childViewHolder(inflater.inflate(R.layout.view_orders_child_child, childViewGroup, false));
+        return new childViewHolder(inflater.inflate(R.layout.view_orders_child_child1, childViewGroup, false));
     }
 
     @Override

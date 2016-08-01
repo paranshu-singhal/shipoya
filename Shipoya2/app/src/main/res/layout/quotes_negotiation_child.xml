@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
+    android:layout_marginLeft="@dimen/card_side_margin"
+    android:layout_marginRight="@dimen/card_side_margin"
     app:cardBackgroundColor="@color/white"
-    android:layout_marginBottom="5dp"
-    app:cardElevation="8dp">
+    android:layout_marginBottom="@dimen/card_zero_margin"
+    app:cardElevation="@dimen/card_elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Carrier Name"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/dark_grey"
                     android:textSize="18sp" />
 
                 <TextView
@@ -54,6 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rating"
+                    android:textColor="@color/dark_grey"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
@@ -82,7 +83,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Status"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:background="@drawable/rounded_blue"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
             </LinearLayout>
         </RelativeLayout>
 

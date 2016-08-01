@@ -7,7 +7,7 @@
     android:orientation="vertical"
     app:cardCornerRadius="4dp"
     app:cardBackgroundColor="@color/white"
-    app:cardElevation="8dp">
+    app:cardElevation="@dimen/card_elevation">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -106,7 +106,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text="@string/confirm_n_pay" />
+                android:enabled="false"
+                android:textColor="@drawable/quote_confirm_btn"
+                android:text="@string/awaiting_confirm" />
         </LinearLayout>
 
     </LinearLayout>

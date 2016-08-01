@@ -1,5 +1,6 @@
 package com.android.shipoya.shipoya2;
-public class OrderParent {
+
+public class OrderParent implements Comparable<OrderParent>{
 
 
     private String from, to, orderId;
@@ -27,6 +28,16 @@ public class OrderParent {
         this.orderId = orderId;
         this.date = date;
 
+    }
+
+    @Override
+    public int compareTo(OrderParent another) {
+        if(this.getDate()>another.getDate()){
+            return -1;
+        }
+        else{
+            return 1;
+        }
     }
 }
 

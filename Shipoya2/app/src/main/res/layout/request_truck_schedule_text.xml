@@ -10,7 +10,7 @@
         android:text="31"
         android:textSize="26sp"
         style="@style/style_request_truck"
-        android:id="@+id/textView" />
+        android:id="@+id/textViewDay" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:text="December"
             android:textSize="13sp"
             style="@style/style_request_truck"
-            android:id="@+id/textView2" />
+            android:id="@+id/textViewMonth" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,6 +35,6 @@
             android:text="2016"
             android:textSize="13sp"
             style="@style/style_request_truck"
-            android:id="@+id/textView3" />
+            android:id="@+id/textViewYear" />
     </LinearLayout>
 </LinearLayout>

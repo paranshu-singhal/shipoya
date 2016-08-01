@@ -2,6 +2,8 @@ package com.android.shipoya.shipoya2;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,6 +31,8 @@ public class ViewOrdersChildActivity extends AppCompatActivity implements CardVi
 
     private static final String TAGlog = "logTag";
     private String order_id;
+    ViewPager pager;
+    TabLayout tabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +45,13 @@ public class ViewOrdersChildActivity extends AppCompatActivity implements CardVi
         indicator.setImageResource(R.drawable.ic_expand_less_black_24dp);
 
         order_id = getIntent().getExtras().getString("order_id");
+
         order_id_view.setText(order_id);
         parentView.setOnClickListener(this);
+        pager = (ViewPager) findViewById(R.id.pager);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
-        (new LoadData()).execute();
+        onPostExecute();
 
     }
 
@@ -53,65 +60,86 @@ public class ViewOrdersChildActivity extends AppCompatActivity implements CardVi
         onBackPressed();
     }
 
-    public class LoadData extends AsyncTask<Void, Void, String> {
+
+    protected void onPostExecute() {
 
         List<ViewOrdersChildHolderClass.ParentHolderClass> parentHolderClass = new ArrayList<>();
         List<ViewOrdersChildHolderClass.ChildHolderClass> childHolderClasses = new ArrayList<>();
 
-        @Override
-        protected String doInBackground(Void... params) {
-            String s = null;
-            try {
-                ObjectInputStream ois = new ObjectInputStream(openFileInput("ordersCache"));
-                s = (String) ois.readObject();
-            } catch (Throwable t) {
-                Log.d(TAGlog, t.getMessage());
-            }
-            return s;
-        }
+        TextView src = (TextView) findViewById(R.id.from);
+        TextView dest = (TextView) findViewById(R.id.to);
+        TextView yr = (TextView) findViewById(R.id.year);
+        TextView date = (TextView) findViewById(R.id.date);
 
-        @Override
-        protected void onPostExecute(String buffer) {
-            TextView src = (TextView) findViewById(R.id.from);
-            TextView dest = (TextView) findViewById(R.id.to);
-            TextView yr = (TextView) findViewById(R.id.year);
-            TextView date = (TextView) findViewById(R.id.date);
-            TextView source = (TextView) findViewById(R.id.textView35);
-            TextView destination = (TextView) findViewById(R.id.textView36);
+        DateFormat dateFinal1 = new SimpleDateFormat("EEE, MMM d", Locale.ENGLISH);
+        DateFormat dateFinal2 = new SimpleDateFormat("yyyy", Locale.ENGLISH);
 
+        try {
+            JSONObject object = StaticData.ORDER_DATA;
+            JSONArray array = object.getJSONArray("data");
 
-            DateFormat dateFinal1 = new SimpleDateFormat("EEE, MMM d", Locale.ENGLISH);
-            DateFormat dateFinal2 = new SimpleDateFormat("yyyy", Locale.ENGLISH);
-
-            //Log.d(TAGlog, String.format("%d", buffer.length()));
-            try {
-                JSONObject object = new JSONObject(buffer);
-                JSONArray array = object.getJSONArray("data");
-
-                for (int i = 0; i < array.length(); i++) {
-                    JSONObject obj = array.getJSONObject(i);
-                    if (obj.getJSONObject("transit").getBoolean("show") && obj.getString("order_id").equals(order_id)) {
-                        date.setText(dateFinal1.format(new Date(obj.getLong("scheduled_on"))));
-                        yr.setText(dateFinal2.format(new Date(obj.getLong("scheduled_on"))));
-                        src.setText(obj.getJSONObject("source").getString("city").substring(0, 3).toUpperCase());
-                        dest.setText(obj.getJSONObject("destination").getString("city").substring(0, 3).toUpperCase());
-                        source.setText(obj.getJSONObject("source").getString("city") + ", " + obj.getJSONObject("destination").getString("state"));
-                        destination.setText(obj.getJSONObject("destination").getString("city") + ", " + obj.getJSONObject("destination").getString("state"));
-
-                        childHolderClasses.add(new ViewOrdersChildHolderClass.ChildHolderClass(2423422321L, "22hrs 32mins", "Maruti, Udyog Vihar"));
-                        parentHolderClass.add(new ViewOrdersChildHolderClass.ParentHolderClass("HRXX-2345", "Delivered", "", 4, childHolderClasses));
-                        break;
-                    }
+            JSONObject obj = null;
+            for (int i = 0; i < array.length(); i++) {
+                obj = array.getJSONObject(i);
+                if (obj.getJSONObject("transit").getBoolean("show") && obj.getString("order_id").equals(order_id)) {
+                    Log.d(TAGlog, obj.getString("order_id"));
+                    break;
                 }
-            } catch (Throwable t) {
-                Log.d(TAGlog, t.getMessage());
             }
-            RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.recyclerviewOrdersChild);
-            mRecyclerView.setHasFixedSize(true);
-            LinearLayoutManager mLayoutManager = new LinearLayoutManager(ViewOrdersChildActivity.this);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            ViewOrdersChildAdaptor adaptor = new ViewOrdersChildAdaptor(ViewOrdersChildActivity.this, parentHolderClass);
-            mRecyclerView.setAdapter(adaptor);
+            date.setText(dateFinal1.format(new Date(Long.parseLong(obj.getString("pick_up_date")) * 1000)));
+            yr.setText(dateFinal2.format(new Date(obj.getLong("pick_up_date") * 1000)));
+            src.setText(obj.getJSONObject("source").getString("city").trim().substring(0, 3).toUpperCase());
+            dest.setText(obj.getJSONObject("destination").getString("city").trim().substring(0, 3).toUpperCase());
+
+            String srcTxt="", destTxt="";
+            if((obj.getJSONObject("source").has("area"))){
+                srcTxt += (obj.getJSONObject("source").getString("area") + ", "); }
+            if(srcTxt.substring(srcTxt.length()-1).equals(",")){
+                srcTxt = srcTxt.substring(0, srcTxt.length()-1);
+            }
+            srcTxt += obj.getJSONObject("source").getString("city")
+                    + ", " + obj.getJSONObject("source").getString("state");
+            srcTxt = srcTxt.trim();
+
+            if((obj.getJSONObject("destination").has("area"))){
+                destTxt += (obj.getJSONObject("destination").getString("area") + ", "); }
+            if(destTxt.substring(destTxt.length()-1).equals(",")){
+                destTxt = destTxt.substring(0, destTxt.length()-1);
+            }
+            destTxt += obj.getJSONObject("destination").getString("city")
+                    + ", " + obj.getJSONObject("destination").getString("state");
+            destTxt = destTxt.trim();
+
+            NewOrderHolder newOrderHolder = new NewOrderHolder(
+                    srcTxt,
+                    obj.getString("shipper_name"),
+                    destTxt,
+                    obj.getJSONObject("preferred_truck_type").getString("truck_type"),
+                    obj.getString("material_type"),
+                    obj.getString("payment_terms"),
+                    obj.getString("consignment_weight")+" MT",
+                    obj.getString("num_trucks"),
+                    false);
+            childHolderClasses.add(new ViewOrdersChildHolderClass.ChildHolderClass(2423422321L, "22hrs 32mins", "Maruti, Udyog Vihar"));
+            parentHolderClass.add(new ViewOrdersChildHolderClass.ParentHolderClass("HRXX-2345", "Delivered", "", 4, childHolderClasses));
+            parentHolderClass.add(new ViewOrdersChildHolderClass.ParentHolderClass("HRXX-2345", "Delivered", "", 4, childHolderClasses));
+
+            NewOrderFragment newOrderFragment = new NewOrderFragment();
+            Bundle b = new Bundle();
+            b.putParcelable("data", newOrderHolder);
+            newOrderFragment.setArguments(b);
+
+            OrderTruckModel orderTruckModel = new OrderTruckModel(parentHolderClass);
+            OrderTruckFragment orderTruckFragment = new OrderTruckFragment();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("data", orderTruckModel);
+            orderTruckFragment.setArguments(bundle);
+
+            pager.setAdapter(new OrderChildPagerAdapter(getSupportFragmentManager(), newOrderFragment, orderTruckFragment));
+            tabLayout.setupWithViewPager(pager);
+
+        } catch (Throwable t) {
+            Log.d(TAGlog, t.getMessage());
         }
     }
 }

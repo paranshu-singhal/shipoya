@@ -24,10 +24,6 @@ public class GCMRegistrationIntentService extends IntentService{
     }
 
     private void registerGCM() {
-
-        //Log.d(logTag, "registerGCM");
-        //Registration complete intent init
-        // ially null
         Intent registrationComplete = null;
 
         String token = null;
@@ -41,8 +37,8 @@ public class GCMRegistrationIntentService extends IntentService{
 
             registrationComplete = new Intent(REGISTRATION_SUCCESS);
             registrationComplete.putExtra("token", token);
-        } catch (Exception e) {
-            Log.d(logTag, "Registration error");
+        } catch (Throwable e) {
+            Log.d(logTag, e.getMessage());
             registrationComplete = new Intent(REGISTRATION_ERROR);
         }
         LocalBroadcastManager.getInstance(this).sendBroadcast(registrationComplete);

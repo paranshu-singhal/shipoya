@@ -6,10 +6,11 @@
     android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="400dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/payment_mode_title"
+        android:textAlignment="center"
         android:textColor="@color/colorAccent"
         android:layout_gravity="center_horizontal"/>
 

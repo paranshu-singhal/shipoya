@@ -13,20 +13,16 @@ import android.widget.TextView;
 
 public class VerifyOtpFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "CountryCode";
     private static final String ARG_PARAM2 = "Number";
-
-    private String mCountryCode;
     private String mNumber;
 
     private OnFragmentInteractionListener mListener;
 
     public VerifyOtpFragment() { }
 
-    public static VerifyOtpFragment newInstance(String param1, String param2) {
+    public static VerifyOtpFragment newInstance(String param2) {
         VerifyOtpFragment fragment = new VerifyOtpFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -36,7 +32,6 @@ public class VerifyOtpFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mCountryCode = getArguments().getString(ARG_PARAM1);
             mNumber = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -45,14 +40,10 @@ public class VerifyOtpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_verify_otp, container, false);
 
-        TextView codeText = (TextView)v.findViewById(R.id.textView7);
         TextView numberText = (TextView)v.findViewById(R.id.textView8);
         final TextView timeText = (TextView)v.findViewById(R.id.textView30);
-        EditText otp = (EditText)v.findViewById(R.id.editText3);
+        final EditText otp = (EditText)v.findViewById(R.id.editText3);
         Button btn = (Button)v.findViewById(R.id.button6);
-        TextView loginText = (TextView)v.findViewById(R.id.login_textView);
-
-        codeText.setText(mCountryCode);
         numberText.setText(mNumber);
 
         new CountDownTimer(90000, 1000) {
@@ -62,8 +53,13 @@ public class VerifyOtpFragment extends Fragment {
             public void onFinish() {
             }
         }.start();
-        mListener.onVerifyPressed(btn, otp);
-        mListener.onLoginClicked2(loginText);
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onVerifyPressed(otp.getText().toString(), mNumber);
+            }
+        });
         return v;
     }
 
@@ -84,7 +80,6 @@ public class VerifyOtpFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onVerifyPressed(Button btn, EditText otp);
-        void onLoginClicked2(TextView loginTextView);
+        void onVerifyPressed(String otp, String username);
     }
 }

@@ -3,10 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:orientation="vertical"
-    app:cardElevation="8dp">
+    android:layout_marginBottom="@dimen/card_zero_margin"
+    android:layout_marginLeft="@dimen/card_side_margin"
+    android:layout_marginRight="@dimen/card_side_margin"
+    android:layout_marginTop="@dimen/card_child_margin"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardElevation="@dimen/card_elevation"
+    app:cardPreventCornerOverlap="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,11 +67,13 @@
                 android:layout_height="1dp"
                 android:background="@color/light_grey" />
 
-            <com.android.shipoya.shipoya2.CustomListView
-                android:id="@+id/itemList"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none" />
+            <!--<com.android.ShipoyaFleet.CustomViews.CustomListView-->
+            <!--android:id="@+id/itemList"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:scrollbars="none" />-->
+
+            <include layout="@layout/invoice_item_child" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -107,18 +112,18 @@
                     android:id="@+id/viewOrder"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:layout_weight="1"
                     android:text="View Order" />
 
                 <Button
                     android:id="@+id/detailed"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:layout_weight="1"
                     android:text="Detailed" />
             </LinearLayout>
         </LinearLayout>

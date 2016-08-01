@@ -1,19 +1,22 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        </style>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:dropDownItemStyle">@style/myDropDownItemStyle</item>
+        <item name="android:dropDownListViewStyle">@style/myDropDownListViewStyle</item>
+    </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.StatusTransparent">
+        <item name="colorPrimaryDark">@android:color/transparent</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -21,17 +24,9 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="style_request_truck">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:backgroundTint">@android:color/white</item>
-        <item name="android:textColorHint">@android:color/white</item>
-    </style>
-
-    <style name="style_button">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:backgroundTint">@color/colorAccent</item>
-        <item name="android:textAllCaps">true</item>
-        <item name="android:buttonStyle">?android:attr/buttonStyleSmall</item>
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:backgroundTint">@color/dark_grey</item>
+        <item name="android:textColorHint">@color/dark_grey</item>
     </style>
 
     <style name="style_text_homepage">
@@ -47,7 +42,12 @@
         <item name="android:textSize">18sp</item>
         <item name="android:paddingTop">6dp</item>
     </style>
-
-
-
+    <style name="myDropDownListViewStyle" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+    <style name="myDropDownItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/dark_grey</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>

@@ -12,23 +12,15 @@
         android:layout_marginLeft="29dp"
         android:layout_marginStart="29dp" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textViewPayment2"
+        style="@style/style_request_truck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:drawableLeft="@drawable/credit_cards_white_24dp"
+        android:drawableStart="@drawable/credit_cards_white_24dp" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/credit_cards_white_24dp" />
 
-        <TextView
-            android:id="@+id/textViewPayment2"
-            style="@style/style_request_truck"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
 </LinearLayout>

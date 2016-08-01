@@ -8,10 +8,11 @@ import java.util.List;
  * Created by aaaa on 6/13/2016.
  */
 
-public class InvoiceParent implements ParentListItem {
+public class InvoiceParent implements ParentListItem, Comparable<InvoiceParent> {
 
 
-    String from, to, since, invoiceId, cost, date;
+    String from, to, since, invoiceId, cost;
+    long date;
     List<InvoiceChild> childList;
 
     @Override
@@ -44,17 +45,26 @@ public class InvoiceParent implements ParentListItem {
         return cost;
     }
 
-    public String getDate() {
+    public long getDate() {
         return date;
     }
 
-    public InvoiceParent(String from, String to, String since, String invoiceId, String cost, String date, List<InvoiceChild> childList) {
+    public InvoiceParent(String from, String to, String since, String invoiceId, String cost, long date, List<InvoiceChild> childList) {
         this.from = from;
         this.to = to;
         this.since = since;
         this.invoiceId = invoiceId;
         this.cost = cost;
         this.date = date;
-        this.childList=childList;
+        this.childList = childList;
+    }
+
+    @Override
+    public int compareTo(InvoiceParent another) {
+        if (this.getDate() > another.getDate()) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
 }

@@ -83,8 +83,8 @@ public class QuotesRecyclerAdapter extends RecyclerView.Adapter<QuotesRecyclerAd
         DateFormat dateFinal1 = new SimpleDateFormat("EEE, MMM d");
         DateFormat dateFinal2 = new SimpleDateFormat("yyyy");
         try {
-            holder.date.setText(dateFinal1.format(new Date(obj.getDate())));
-            holder.yr.setText(dateFinal2.format(new Date(obj.getDate())));
+            holder.date.setText(dateFinal1.format(new Date(obj.getDate()*1000)));
+            holder.yr.setText(dateFinal2.format(new Date(obj.getDate()*1000)));
         }
         catch (Throwable t){
             Log.d("logtag", t.getMessage());

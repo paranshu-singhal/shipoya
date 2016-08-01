@@ -21,15 +21,15 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-        return new DatePickerDialog(getActivity(), this, year, month, day);
+        DatePickerDialog datePickerDialog = (new DatePickerDialog(getActivity(), this, year, month, day));
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() + 86400);
+        return datePickerDialog;
     }
 
 
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-        //Log.d(logTag, String.format("%d, %d, %d", year, monthOfYear, dayOfMonth));
         mCallback.onGiveDate(year, monthOfYear, dayOfMonth);
-
     }
 
     public interface giveDate{

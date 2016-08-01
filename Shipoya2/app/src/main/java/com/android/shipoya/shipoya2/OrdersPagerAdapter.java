@@ -15,19 +15,19 @@ import java.util.List;
 public class OrdersPagerAdapter extends PagerAdapter {
 
     Context context;
-
-
     String[] arr = new String[3];
-    List<OrderParent> parents;
+    List<OrderParent> parents, parents_trans, parents_clos;
 
-    public OrdersPagerAdapter(Context context, List<OrderParent> parents) {
+
+    public OrdersPagerAdapter(Context context, List<OrderParent> parents, List<OrderParent> parents_trans, List<OrderParent> parents_clos) {
         this.context = context;
-        arr[0] = context.getResources().getString(R.string.scheduled);
+        this.parents = parents;
+        this.parents_trans = parents_trans;
+        this.parents_clos = parents_clos;
+        arr[0] = "SCHEDULED";
         arr[1] = context.getResources().getString(R.string.in_transit);
         arr[2] = context.getResources().getString(R.string.delivered);
-        this.parents = parents;
     }
-
 
     @Override
     public int getCount() {
@@ -37,15 +37,33 @@ public class OrdersPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.view_orders_pager_fragment,container,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.pager_fragment_layout,container,false);
 
-        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerviewInvoices);
+        RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        OrdersRecyclerAdapter adapter = new OrdersRecyclerAdapter(context, parents);
+        LinearLayout noEntry = (LinearLayout) view.findViewById(R.id.no_entry);
+
+        OrdersRecyclerAdapter adapter=null;
+        switch (position){
+            case 0:
+                adapter = new OrdersRecyclerAdapter(context, parents);
+                break;
+            case 1:
+                adapter = new OrdersRecyclerAdapter(context, parents_trans);
+                break;
+            case 2:
+                adapter = new OrdersRecyclerAdapter(context, parents_clos);
+                break;
+        }
         mRecyclerView.setAdapter(adapter);
-        ((ViewPager) container).addView(view);
+
+        if (adapter.getItemCount() == 0) {
+            noEntry.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
+        (container).addView(view);
         return view;
     }
 

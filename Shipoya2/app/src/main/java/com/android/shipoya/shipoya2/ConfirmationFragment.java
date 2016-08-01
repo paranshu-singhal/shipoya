@@ -1,6 +1,5 @@
 package com.android.shipoya.shipoya2;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.net.Uri;
@@ -32,7 +31,7 @@ public class ConfirmationFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.quotes_confirmation, container, false);
+        View v =  inflater.inflate(R.layout.fragment_confirmation, container, false);
         final TextView carr_name = (TextView)v.findViewById(R.id.textView24);
         TextView money = (TextView)v.findViewById(R.id.textView23);
         final TextView pick_date = (TextView)v.findViewById(R.id.textView26);

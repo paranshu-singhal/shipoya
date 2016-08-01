@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
     tools:context="com.android.shipoya.shipoya2.ViewOrdersActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/appBar"
         android:background="@color/view_orders_appbar"
         android:backgroundTint="@color/view_orders_appbar"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -28,22 +30,28 @@
             android:backgroundTint="@color/colorAccent"
             android:fillViewport="true"
             app:tabGravity="fill"
+            app:tabIndicatorColor="@android:color/white"
             app:tabMode="fixed"
             app:tabSelectedTextColor="@android:color/white"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabTextColor="#aaffffff">
-        </android.support.design.widget.TabLayout>
+            app:tabTextColor="#aaffffff" />
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <com.android.shipoya.shipoya2.CustomSwipeRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="108dp"
-        android:animateLayoutChanges="true"
-        android:animationCache="true"
-        app:layout_anchor="@+id/appBar"
-        app:layout_anchorGravity="bottom" />
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="108dp"
+            android:animateLayoutChanges="true"
+            android:animationCache="true"
+            app:layout_anchor="@+id/appBar"
+            app:layout_anchorGravity="bottom" />
+
+    </com.android.shipoya.shipoya2.CustomSwipeRefreshLayout>
+
+</LinearLayout>

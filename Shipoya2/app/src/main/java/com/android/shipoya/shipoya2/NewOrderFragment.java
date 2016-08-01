@@ -10,11 +10,18 @@ import android.widget.TextView;
 public class NewOrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.quotes_new_order, container, false);
-        ((TextView)v.findViewById(R.id.textView16)).setText(getArguments().getString("src"));
-        ((TextView)v.findViewById(R.id.textView18)).setText(getArguments().getString("dest"));
-        ((TextView)v.findViewById(R.id.textView20)).setText(getArguments().getString("truck_type"));
-        ((TextView)v.findViewById(R.id.textView22)).setText(getArguments().getString("exp_price"));
+        View v = inflater.inflate(R.layout.new_order_fragment, container, false);
+
+        NewOrderHolder holder = getArguments().getParcelable("data");
+
+        ((TextView)v.findViewById(R.id.owner_name)).setText(holder.getShipperName());
+        ((TextView)v.findViewById(R.id.source)).setText(holder.getSource());
+        ((TextView)v.findViewById(R.id.destination)).setText(holder.getDestination());
+        ((TextView)v.findViewById(R.id.truck_type)).setText(holder.getTruckType());
+        ((TextView)v.findViewById(R.id.num_truck)).setText("X "+holder.getNumTrucks());
+        ((TextView)v.findViewById(R.id.material_type)).setText(holder.getMaterialType());
+        ((TextView)v.findViewById(R.id.quantity)).setText(holder.getConsignmentWeight());
+        ((TextView)v.findViewById(R.id.payment_detail)).setText(holder.getPaymentDetail());
         return v;
     }
 }

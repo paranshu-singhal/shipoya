@@ -1,0 +1,34 @@
+{
+  "message": "retrieved 1 object(s)",
+  "data": [
+    {
+      "pick_up_date": 1469610000,
+      "invoice_url": "https://s3-us-west-2.amazonaws.com/shipoya-invoice/shippers/DaburAgroPrivateLtd-92qxm5Y.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=86400&X-Amz-Credential=AKIAJTCAXOLWYMSN3S6A%2F20160722%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Date=20160722T074413Z&X-Amz-Signature=f0759720813f303391cb8e6abe3f4bbfe6b5216cfb461578758bbb44976920f8",
+      "order_id": "llht49pGDnBuHwRmTRxUn6iZ",
+      "scheduled_on": 1469144156,
+      "load_type": "Part Truck Load",
+      "num_trucks": 1,
+      "carrier_name": "SafeExpress Logistics",
+      "payment_terms": "90% Cash Advance",
+      "invoice_status": "pending",
+      "order_name": "test-order20",
+      "destination": {
+        "city": "Agra",
+        "state": "Uttar Pradesh"
+      },
+      "source": {
+        "city": "Bokaro Steel City",
+        "state": "Jharkhand"
+      },
+      "invoice_amount": 406.2,
+      "order_status": "in-transit",
+      "preferred_truck_type": {
+        "truck_tonnage": "0-2 MT",
+        "truck_length": "0-9 feet",
+        "truck_type": "Trailers \u2013 10 Axle Trailer"
+      }
+    }
+  ],
+  "http_code": 200,
+  "success": true
+}

@@ -15,15 +15,15 @@ public class QuotesPagerAdapter extends PagerAdapter {
 
     Context context;
     String[] title;
-    List<OrderParent> parents;
+    List<OrderParent> parents, parentsNeg,parentsConf ;
 
-    public QuotesPagerAdapter(Context context, List<OrderParent> parents) {
+    public QuotesPagerAdapter(Context context, List<OrderParent> parents, List<OrderParent> parentsNeg, List<OrderParent> parentsConf) {
         this.context = context;
-        title = new String[]{"ALL","NEGOTIATED","CONFIRMED"};
+        title = new String[]{"NEW REQUEST","NEGOTIATED","CONFIRMED"};
         this.parents = parents;
+        this.parentsNeg = parentsNeg;
+        this.parentsConf = parentsConf;
     }
-
-
     @Override
     public int getCount() {
         return 3;
@@ -33,21 +33,37 @@ public class QuotesPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(context).inflate(R.layout.pager_fragment_layout, container, false);
-
-
         RecyclerView mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        QuotesRecyclerAdapter adapter = new QuotesRecyclerAdapter(context, parents);
+        LinearLayout noEntry = (LinearLayout) view.findViewById(R.id.no_entry);
+
+        QuotesRecyclerAdapter adapter=null;
+
+        switch (position){
+            case 0:
+                adapter = new QuotesRecyclerAdapter(context, parents);
+                break;
+            case 1:
+                adapter = new QuotesRecyclerAdapter(context, parentsNeg);
+                break;
+            case 2:
+                adapter = new QuotesRecyclerAdapter(context, parentsConf);
+                break;
+        }
         mRecyclerView.setAdapter(adapter);
-        ((ViewPager) container).addView(view);
+        if (adapter.getItemCount() == 0) {
+            noEntry.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        }
+        (container).addView(view);
         return view;
     }
 
     @Override
     public boolean isViewFromObject(View view, Object o) {
-        return view == ((LinearLayout) o);
+        return view == (o);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
         try {
             mCallback = (giveTime) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString() + " must implement OnHeadlineSelectedListener");}
+            throw new ClassCastException(activity.toString() + " must implement giveTime");}
     }
     public interface giveTime{
         void onGiveTime(int hourOfDay, int minute);

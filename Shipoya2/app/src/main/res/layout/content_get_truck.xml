@@ -32,7 +32,6 @@
                 android:id="@+id/linearLayout12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
 
@@ -40,17 +39,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/from"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/dark_grey"
                     android:textSize="15sp" />
 
-                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                <EditText
                     android:id="@+id/FromAutocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:textColor="@color/white" />
-
+                    android:backgroundTint="@color/dark_grey"
+                    android:textColor="@color/dark_grey"
+                    android:focusableInTouchMode="false"/>
             </LinearLayout>
 
             <LinearLayout
@@ -64,18 +62,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/to"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/dark_grey"
                     android:textSize="15sp" />
 
-                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                <EditText
                     android:id="@+id/ToAutocomplete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/white"
-                    android:completionThreshold="1"
-                    android:textColor="@color/white" />
+                    android:backgroundTint="@color/dark_grey"
+                    android:textColor="@color/dark_grey"
+                    android:focusableInTouchMode="false"/>
             </LinearLayout>
         </LinearLayout>
+
         <ImageView
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -109,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/schedule"
-                android:textColor="@android:color/white"
+                android:textColor="@color/dark_grey"
                 android:textSize="15sp" />
 
             <include layout="@layout/request_truck_schedule_text" />
@@ -117,7 +116,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/white" />
+                android:background="@color/dark_grey" />
 
         </LinearLayout>
 
@@ -134,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/expected_price"
-                android:textColor="@android:color/white"
+                android:textColor="@color/dark_grey"
                 android:textSize="15sp" />
 
             <EditText
@@ -142,8 +141,9 @@
                 style="@style/style_request_truck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/rupee_white16"
-                android:drawableStart="@drawable/rupee_white16"
+                android:drawableLeft="@drawable/rupee_black16"
+                android:drawableStart="@drawable/rupee_black16"
+                android:drawablePadding="5dp"
                 android:inputType="numberDecimal" />
         </LinearLayout>
     </LinearLayout>
@@ -172,16 +172,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/material"
-                android:textColor="@android:color/white"
+                android:textColor="@color/dark_grey"
                 android:textSize="15sp" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/material_type"
-                style="@style/style_request_truck"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:drawableLeft="@drawable/ic_view_module_white_24px"
-                android:drawableStart="@drawable/ic_view_module_white_24px" />
+                android:drawableStart="@drawable/ic_view_module_white_24px"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/dark_grey" />
         </LinearLayout>
 
         <LinearLayout
@@ -197,13 +200,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/material_weight"
-                android:textColor="@android:color/white"
+                android:textColor="@color/dark_grey"
                 android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/material_weight"
                 style="@style/style_request_truck"
                 android:layout_gravity="end"
+                android:drawableLeft="@drawable/ic_tonnage"
+                android:drawableStart="@drawable/ic_tonnage"
+                android:drawableEnd="@drawable/mt1"
+                android:drawablePadding="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal" />
@@ -232,7 +239,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/truck_type"
-                android:textColor="@android:color/white"
+                android:textColor="@color/dark_grey"
                 android:textSize="15sp" />
 
             <include layout="@layout/truck_type_field_layout" />
@@ -240,15 +247,16 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@android:color/white" />
+                android:background="@color/dark_grey" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/numberPicker_container"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="vertical">
 
             <include
@@ -270,7 +278,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/payment_mode"
-            android:textColor="@android:color/white"
+            android:textColor="@color/dark_grey"
             android:textSize="15sp" />
 
         <include layout="@layout/payment_mode_field_layout" />
@@ -278,8 +286,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="@android:color/white" />
+            android:layout_marginTop="2dp"
+            android:background="@color/dark_grey" />
     </LinearLayout>
 
     <Button

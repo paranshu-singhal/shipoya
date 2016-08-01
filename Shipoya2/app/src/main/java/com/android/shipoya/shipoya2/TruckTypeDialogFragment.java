@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -17,6 +18,9 @@ public class TruckTypeDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.truck_type_dialog, container, false);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        getDialog().getWindow().setLayout(0, (ViewGroup.LayoutParams.MATCH_PARENT));
+
 
         Spinner spinner5 = (Spinner) v.findViewById(R.id.spinner5);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(), R.array.truck_type_1, android.R.layout.simple_spinner_item);
@@ -25,10 +29,9 @@ public class TruckTypeDialogFragment extends DialogFragment {
 
         Spinner spinner6 = (Spinner) v.findViewById(R.id.spinner6);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getActivity(), R.array.truck_type_2, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner6.setAdapter(adapter2);
 
-        getDialog().setCanceledOnTouchOutside(false);
         Button btn = (Button)v.findViewById(R.id.button10);
         mCallback.onTruckTypeSelected(spinner5, spinner6, btn);
         return v;

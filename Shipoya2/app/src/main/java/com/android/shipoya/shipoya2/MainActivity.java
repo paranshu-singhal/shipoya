@@ -1,17 +1,21 @@
 package com.android.shipoya.shipoya2;
 
-import android.app.ProgressDialog;
+import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,62 +24,61 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
-import java.net.CookieManager;
-import java.net.HttpCookie;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.net.URLEncoder;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-
-public class MainActivity extends AppCompatActivity implements EnterPhoneNumberFragment.OnFragmentInteractionListener,
+public class MainActivity extends AppCompatActivity implements
         VerifyOtpFragment.OnFragmentInteractionListener,
-        LoginPageFragment.OnFragmentInteractionListener {
+        LoginPage.onLoginInteraction,
+        SignUp.OnSignUpInteraction,
+        FirstTimeLogin.FirstTimeLoginFragmentListener,
+        FragmentSetPassword.FragmentSetPasswordFragmentListener,
+        SMSListener.OtpReceive {
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;
+    private BroadcastReceiver networkStateReceiver;
+    private boolean doubleBackToExitPressedOnce = false;
+    private String token;
+    private String phone_number;
+    SMSListener smsListener;
+    IntentFilter filterSms;
+
     private static final String logTag = "logTag";
-    int response_code_1, response_code_2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
 
-        setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
             return;
         }
+
+        networkStateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                StaticData.NETWORK_AVAILABLE = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+            }
+        };
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkStateReceiver, filter);
 
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
 
             //When the broadcast received
             //We are sending the broadcast from GCMRegistrationIntentService
-
-
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_SUCCESS)) {
-                    String token = intent.getStringExtra("token");
+                    token = intent.getStringExtra("token");
                     //Toast.makeText(getApplicationContext(), "Registration token:" + token, Toast.LENGTH_LONG).show();
-
                 } else if (intent.getAction().equals(GCMRegistrationIntentService.REGISTRATION_ERROR)) {
                     Log.d(logTag, "GCM registration error!");
                 } else {
@@ -83,7 +86,14 @@ public class MainActivity extends AppCompatActivity implements EnterPhoneNumberF
                 }
             }
         };
+        Intent intent = new Intent(MainActivity.this, GCMRegistrationIntentService.class);
+        startService(intent);
 
+        smsListener = new SMSListener(this);
+        filterSms = new IntentFilter();
+        filterSms.addAction("android.provider.Telephony.SMS_RECEIVED");
+
+        /*
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 
         //if play service is not available
@@ -97,283 +107,415 @@ public class MainActivity extends AppCompatActivity implements EnterPhoneNumberF
                 Log.d(logTag, "This device does not support for Google Play Service!");
             }
         } else {
-            Intent intent = new Intent(this, GCMRegistrationIntentService.class);
-            startService(intent);
+            */
+        //}
+
+        SharedPreferences test = getSharedPreferences("cookie", Context.MODE_PRIVATE);
+//        Log.d(logTag, (test.getStringSet("cookies", null)==null)?"cookies null":"cookies not null");
+
+        if (test.getStringSet("cookies", null) == null || !isNetworkAvailable()) {
+            LoginPage loginPage = new LoginPage();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.main_container, loginPage, "loginFragment")
+                    .commit();
+        } else {
+            Intent i = new Intent(MainActivity.this, SplashScreen.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+            finish();
         }
-        EnterPhoneNumberFragment fragmentPhoneNumber = new EnterPhoneNumberFragment();
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_container, fragmentPhoneNumber)
-                .commit();
-    }
-
-    @Override
-    public void onButtonPressed(Button Btn, final EditText code, final EditText number) {
-
-        Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (code.getText().length() <= 0) {
-                    code.setError(getResources().getString(R.string.text_error));
-                } else if (number.getText().length() != 10) {
-                    number.setError(getResources().getString(R.string.number_error));
-                } else {
-                    VerifyOtpFragment otpFragment = new VerifyOtpFragment();
-                    Bundle bun = new Bundle();
-                    bun.putString("CountryCode", code.getText().toString());
-                    bun.putString("Number", number.getText().toString());
-                    otpFragment.setArguments(bun);
-
-                    getSupportFragmentManager().beginTransaction()
-                            .setCustomAnimations(R.anim.slide_out_right, R.anim.slide_in_left)
-                            .replace(R.id.main_container, otpFragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
-            }
-        });
-
-    }
-
-
-    @Override
-    public void onVerifyPressed(Button btn, final EditText otp) {
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (otp.getText().toString().equals("1234")) {
-                    Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-
-    }
-
-    @Override
-    public void onLoginClicked1(TextView loginTextView) {
-
-        loginTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginPageFragment loginFragment = new LoginPageFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.slide_out_right, R.anim.slide_in_left)
-                        .replace(R.id.main_container, loginFragment)
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
-
-    }
-
-    @Override
-    public void onLoginClicked2(TextView loginTextView) {
-
-        loginTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginPageFragment loginFragment = new LoginPageFragment();
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(R.anim.slide_out_right, R.anim.slide_in_left)
-                        .replace(R.id.main_container, loginFragment)
-                        .addToBackStack(null)
-                        .commit();
-
-            }
-        });
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //Log.d(logTag, "onResume");
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
+        LocalBroadcastManager.getInstance(MainActivity.this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter(GCMRegistrationIntentService.REGISTRATION_SUCCESS));
+        LocalBroadcastManager.getInstance(MainActivity.this).registerReceiver(mRegistrationBroadcastReceiver, new IntentFilter(GCMRegistrationIntentService.REGISTRATION_ERROR));
+        LocalBroadcastManager.getInstance(MainActivity.this).registerReceiver(networkStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
+
 
     @Override
     protected void onPause() {
         super.onPause();
-        //Log.w(logTag, "onPause");
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(networkStateReceiver);
     }
 
     @Override
-    public void onFragmentInteraction(final EditText username, final EditText password, Button btnLogin) {
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+    public void onSignUp(Button signUp, final EditText firstName, final EditText lastName, final EditText companyName, final EditText mobile, final EditText email) {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                (new load(username.getText().toString(), password.getText().toString())).execute();
+                if (firstName.getText().toString().equals(""))
+                    firstName.setError("Enter first name");
+                else if (lastName.getText().toString().equals(""))
+                    lastName.setError("Enter last name");
+                else if (companyName.getText().toString().equals(""))
+                    companyName.setError("Enter company name");
+                else if (!StaticData.validatePhone(mobile.getText().toString().trim()))
+                    mobile.setError("Enter valid mobile number");
+                else if (!StaticData.validateEmail(email.getText().toString().trim()))
+                    email.setError("Enter valid e-mail");
+                else {
+                    try {
+                        JSONObject main = new JSONObject();
+                        JSONObject name = new JSONObject();
+                        name.put("first_name", firstName.getText().toString().trim());
+                        name.put("last_name", lastName.getText().toString().trim());
+                        main.put("formal_name", name);
+                        main.put("entity_type", "shipper");
+                        main.put("entity_name", companyName.getText().toString().trim());
+                        main.put("mobile_number", mobile.getText().toString().trim());
+                        main.put("email", email.getText().toString().trim());
+
+                        if (StaticData.NETWORK_AVAILABLE) {
+                            (new MakeRequest(
+                                    MainActivity.this,
+                                    "/user_resources/api/web_signup",
+                                    "POST",
+                                    true,
+                                    main,
+                                    new Interface() {
+                                        @Override
+                                        public void onPostExecute(String response) {
+                                            if (response != null && response.length() > 0) {
+                                                try {
+                                                    JSONObject ans = new JSONObject(response);
+                                                    Toast.makeText(MainActivity.this, ans.getString("message") + ". " + getResources().getString(R.string.check_mail_account), Toast.LENGTH_LONG).show();
+                                                    onBackPressed();
+//                                                    Bundle bundle = new Bundle();
+//                                                    bundle.putString("Number", mobile.getText().toString().trim());
+//
+//                                                    VerifyOtpFragment otpFragment = new VerifyOtpFragment();
+//                                                    otpFragment.setArguments(bundle);
+//                                                    getSupportFragmentManager()
+//                                                            .beginTransaction()
+//                                                            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+//                                                            .replace(R.id.main_container, otpFragment, "otpFragment")
+//                                                            .addToBackStack(null)
+//                                                            .commit();
+                                                } catch (Throwable t) {
+                                                    Log.d(logTag, t.getMessage());
+                                                }
+                                            } else {
+                                                Toast.makeText(MainActivity.this, "User sign up not successful. PLease try again later.", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    }
+                            )).execute();
+                        } else {
+                            StaticData.showNetworkError(MainActivity.this);
+                        }
+                    } catch (Exception e) {
+                        Log.d("SIGN_UP", e.getMessage());
+                    }
+                }
             }
         });
     }
 
-    public class load extends AsyncTask<Void, Void, String> {
-
-        String username, password;
-        ProgressDialog dialog;
-        public load(String username, String password) {
-            this.username = username;
-            this.password = password;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            dialog = ProgressDialog.show(MainActivity.this, "", getResources().getString(R.string.loading_wait), true);
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            StringBuilder buffer = null;
-            try {
-                HttpsURLConnection conn = (HttpsURLConnection) (new URL("https://www.shipoya.com/auth_resources/api/user_login")).openConnection();
-
-                SSLContext sc = SSLContext.getInstance("TLS");
-                sc.init(null, null, new java.security.SecureRandom());
-                conn.setSSLSocketFactory(sc.getSocketFactory());
-                conn.setConnectTimeout(15000);
-                conn.setReadTimeout(10000);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.connect();
-
-                JSONObject obj = new JSONObject();
-                obj.put("identifier", username);
-                obj.put("password", password);
-                obj.put("remember_me", "true");
-
-                DataOutputStream dataOutputStream = new DataOutputStream(conn.getOutputStream());
-                dataOutputStream.writeBytes(obj.toString());
-                dataOutputStream.flush();
-                dataOutputStream.close();
-
-                Log.d(logTag, String.format("code %d", conn.getResponseCode()));
-                response_code_1 = conn.getResponseCode();
-
-                buffer = new StringBuilder();
-                InputStream is = conn.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    buffer.append(line);
-                }
-                SharedPreferences sharedPref = getSharedPreferences("cookie", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-
-                List<String> cookiesHeader = conn.getHeaderFields().get("Set-Cookie");
-                if (cookiesHeader != null) {
-                    Set<String> foo = new HashSet<>(cookiesHeader);
-                    editor.putStringSet("cookies", foo).apply();
-                }
-                is.close();
-                conn.disconnect();
-
-            } catch (Throwable t) {
-                Log.d(logTag, t.getMessage());
+    @Override
+    public void onLoginTextClicked(TextView loginTextView) {
+        loginTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
-            return buffer.toString();
-        }
+        });
+    }
 
-        @Override
-        protected void onPostExecute(String s) {
-            dialog.dismiss();
-            try {
-                JSONObject obj = new JSONObject(s);
-                if (obj.getBoolean("success")) {
-                    SharedPreferences sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    Log.d(logTag, obj.getJSONObject("user_data").getString("entity_id"));
-                    editor.putString("entity_id", obj.getJSONObject("user_data").getString("entity_id"));
-                    editor.putString("full_name", obj.getJSONObject("user_data").getString("full_name"));
-                    editor.putString("entity_type", obj.getJSONObject("user_data").getString("entity_type"));
-                    editor.putString("image_url", obj.getJSONObject("user_data").getString("image_url"));
-                    editor.apply();
+    @Override
+    public void onLogin(final EditText username, final EditText password, final Button login, final TextView signup, final TextView forget, final TextView firstTimeLogin) {
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!StaticData.validatePhone(username.getText().toString().trim())) {
+                    username.setError(getResources().getString(R.string.number_error));
+                } else if (password.getText().length() <= 0) {
+                    password.setError(getResources().getString(R.string.text_error));
                 } else {
-                    Toast.makeText(MainActivity.this, getResources().getString(R.string.invalid_pp), Toast.LENGTH_LONG).show();
-                }
+                    JSONObject main = new JSONObject();
+                    try {
+                        main.put("remember_me", "true");
+                        main.put("identifier", username.getText().toString().trim());
+                        main.put("password", password.getText().toString().trim());
+                        main.put("reg_id", token);
 
-            } catch (Throwable t) {
-                Log.d(logTag, "exception: " + t.getMessage());
+                        SharedPreferences sharedPref = getSharedPreferences("user_data", Context.MODE_PRIVATE);
+                        final SharedPreferences.Editor editor = sharedPref.edit();
+                        if (StaticData.NETWORK_AVAILABLE) {
+                            (new MakeRequest(
+                                    MainActivity.this,
+                                    "/auth_resources/api/user_login",
+                                    "POST",
+                                    true,
+                                    main,
+                                    new Interface() {
+                                        @Override
+                                        public void onPostExecute(String response) {
+                                            try {
+                                                if (response != null && response.length() > 0) {
+                                                    JSONObject main = new JSONObject(response);
+                                                    if (main.getBoolean("success")) {
+                                                        JSONObject userData = main.getJSONObject("user_data");
+                                                        editor.putString("img_url", userData.getString("image_url"));
+
+                                                        Log.d(logTag, userData.getString("entity_id"));
+
+                                                        editor.putString("entity_id", userData.getString("entity_id"));
+                                                        editor.putString("user_id", userData.getString("user_id"));
+                                                        editor.putString("full_name", userData.getString("full_name"));
+                                                        editor.putString("entity_type", userData.getString("entity_type"));
+                                                        editor.putString("reg_id", token);
+                                                        editor.apply();
+
+                                                        Intent i = new Intent(MainActivity.this, SplashScreen.class);
+                                                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        startActivity(i);
+                                                        finish();
+                                                    }
+                                                }
+                                            } catch (Throwable t) {
+                                                Log.d(logTag, t.getMessage());
+                                            }
+                                        }
+                                    }
+                            )).execute();
+                        } else {
+                            StaticData.showNetworkError(MainActivity.this);
+                        }
+                    } catch (Throwable t) {
+                        Log.d(logTag, "onLogin" + t.getMessage());
+                    }
+                }
             }
-            (new loadOrderData()).execute();
+        });
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignUp signUp = new SignUp();
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.main_container, signUp, "signUp")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.main_container, new FirstTimeLogin(), "FirstTimeLogin")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+
+        firstTimeLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                        .replace(R.id.main_container, new FirstTimeLogin(), "FirstTimeLogin")
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+    }
+
+    @Override
+    public void onFirstTimeLoginPressed(final EditText username) {
+
+        if (StaticData.NETWORK_AVAILABLE) {
+            if (!StaticData.validatePhone(username.getText().toString().trim())) {
+                username.setError(getResources().getString(R.string.number_error));
+            } else {
+                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+                    requestSMSPermission();
+                } else
+                    registerReceiver(smsListener, filterSms);
+                try {
+                    phone_number = username.getText().toString().trim();
+                    (new MakeRequest(
+                            MainActivity.this,
+                            "/auth_resources/api/forgot_password/reset_choice/mobile/reset_identifier/" + URLEncoder.encode(username.getText().toString().trim(), "UTF-8"),
+                            "GET",
+                            true,
+                            null,
+                            new Interface() {
+                                @Override
+                                public void onPostExecute(String response) {
+                                    if (response != null && response.length() > 0) {
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("Number", username.getText().toString().trim());
+                                        VerifyOtpFragment otpFragment = new VerifyOtpFragment();
+                                        otpFragment.setArguments(bundle);
+                                        getSupportFragmentManager()
+                                                .beginTransaction()
+                                                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                                                .replace(R.id.main_container, otpFragment, "otpFragment")
+                                                .addToBackStack(null)
+                                                .commit();
+                                    } else {
+                                        Toast.makeText(MainActivity.this, "Sorry! This mobile number is not linked to any account. Please contact support.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }
+                    )).execute();
+                } catch (Throwable t) {
+                    Log.d(logTag, t.getMessage());
+                }
+            }
+        } else {
+            StaticData.showNetworkError(MainActivity.this);
         }
     }
 
-    public class loadOrderData extends AsyncTask<Void, Void, String> {
+    @Override
+    public void onOtpReceive(String otp) {
+        onVerifyPressed(otp, phone_number);
+    }
 
-        ProgressDialog dialog;
+    @Override
+    public void onVerifyPressed(final String otp, final String number) {
 
-        @Override
-        protected void onPreExecute() {
-            dialog = ProgressDialog.show(MainActivity.this, "", getResources().getString(R.string.loading_wait), true);
+        if (StaticData.NETWORK_AVAILABLE) {
+            (new MakeRequest(
+                    MainActivity.this,
+                    "/auth_resources/api/password_reset/mobile_reset/" + number + "/token/" + otp,
+                    "GET",
+                    true,
+                    null,
+                    new Interface() {
+                        @Override
+                        public void onPostExecute(String response) {
+                            try {
+                                JSONObject main = new JSONObject(response);
+                                if (main.getBoolean("success")) {
+
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("otp", main.getString("token"));
+                                    FragmentSetPassword setPassword = new FragmentSetPassword();
+                                    setPassword.setArguments(bundle);
+
+                                    getSupportFragmentManager()
+                                            .beginTransaction()
+                                            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                                            .replace(R.id.main_container, setPassword, "setPassword")
+                                            .commit();
+                                }
+                                Toast.makeText(MainActivity.this, main.getString("message"), Toast.LENGTH_LONG).show();
+                            } catch (Throwable t) {
+                                Log.d(logTag, t.getMessage());
+                            }
+                        }
+                    }
+            )).execute();
+        } else {
+            StaticData.showNetworkError(MainActivity.this);
         }
+    }
 
-        @Override
-        protected String doInBackground(Void... params) {
-            StringBuilder buffer = null;
-            SharedPreferences sharedPref = getSharedPreferences("cookie", Context.MODE_PRIVATE);
+    @Override
+    public void onSetPassword(String password, String otp) {
+        if (StaticData.NETWORK_AVAILABLE) {
             try {
-                HttpsURLConnection conn = (HttpsURLConnection) (new URL("https://www.shipoya.com/auction_resources/api/loads/shipper_loads")).openConnection();
+                JSONObject main = new JSONObject();
+                main.put("password", password);
 
-                SSLContext sc = SSLContext.getInstance("TLS");
-                sc.init(null, null, new java.security.SecureRandom());
-                conn.setSSLSocketFactory(sc.getSocketFactory());
-                conn.setConnectTimeout(15000);
-                conn.setReadTimeout(10000);
-                conn.setRequestMethod("GET");
-                conn.setRequestProperty("Content-Type", "application/json");
-                conn.setRequestProperty("Cookie", TextUtils.join(";", sharedPref.getStringSet("cookies", null)));
-                conn.connect();
-
-                Log.d(logTag, "loadOrderData" + String.format("code %d", conn.getResponseCode()));
-                response_code_2 = conn.getResponseCode();
-
-                buffer = new StringBuilder();
-                InputStream is =
-                conn.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    buffer.append(line);
-                }
-                is.close();
-                conn.disconnect();
+                (new MakeRequest(
+                        MainActivity.this,
+                        "/auth_resources/api/password_reset/set_new_password/token/" + URLEncoder.encode(otp, "UTF-8"),
+                        "POST",
+                        true,
+                        main,
+                        new Interface() {
+                            @Override
+                            public void onPostExecute(String response) {
+                                if (response != null && response.length() > 0) {
+                                    try {
+                                        JSONObject main2 = new JSONObject(response);
+                                        if (main2.getBoolean("success")) {
+                                            Toast.makeText(MainActivity.this, main2.getString("message"), Toast.LENGTH_LONG).show();
+                                            Intent intent = new Intent(MainActivity.this, SplashScreen.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    } catch (Throwable t) {
+                                        Log.d(logTag, t.getMessage());
+                                    }
+                                }
+                            }
+                        }
+                )).execute();
             } catch (Throwable t) {
                 Log.d(logTag, t.getMessage());
             }
-            return buffer.toString();
+        } else {
+            StaticData.showNetworkError(MainActivity.this);
         }
+    }
 
-        @Override
-        protected void onPostExecute(String s) {
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().findFragmentByTag("loginFragment") != null && getSupportFragmentManager().findFragmentByTag("loginFragment").isVisible()) {
+            if (doubleBackToExitPressedOnce) {
+                finish();
+            }
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
-            try {
-                if (response_code_1 == 200 && response_code_2==200 && s!=null) {
+            new Handler().postDelayed(new Runnable() {
 
-                    File fileWeatherCache = new File(getFilesDir(), "ordersCache");
-                    if (fileWeatherCache.exists()) {
-                        FileOutputStream fos = openFileOutput("ordersCache", Context.MODE_PRIVATE);
-                        fos.write(s.getBytes());
-                        fos.close();
-                    } else {
-                        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(), "ordersCache")));
-                        oos.writeObject(s);
-                    }
-                    dialog.dismiss();
-                    Intent intent = new Intent(MainActivity.this, HomepageActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    finish();
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
                 }
-            } catch (Throwable t) {
-                Log.d(logTag, t.getMessage());
+            }, 2000);
+        } else if (getSupportFragmentManager().findFragmentByTag("otpFragment") != null && getSupportFragmentManager().findFragmentByTag("otpFragment").isVisible()) {
+        } else if (getSupportFragmentManager().findFragmentByTag("setPassword") != null && getSupportFragmentManager().findFragmentByTag("setPassword").isVisible()) {
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+    }
+
+    private void requestSMSPermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                Manifest.permission.RECEIVE_SMS)) {
+            //         ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.RECEIVE_SMS}, 1);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                registerReceiver(smsListener, filterSms);
+            } else {
+                Toast.makeText(this, "Allow permissions to continue..", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECEIVE_SMS}, 1);
             }
         }
     }
 }
+
+
+
+
+
+

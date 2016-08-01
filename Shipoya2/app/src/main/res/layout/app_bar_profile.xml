@@ -93,4 +93,5 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_profile" />
+
 </android.support.design.widget.CoordinatorLayout>

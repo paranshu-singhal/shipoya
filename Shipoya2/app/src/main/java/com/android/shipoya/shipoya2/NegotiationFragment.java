@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-public class NegotiationFragment extends Fragment {
+public class NegotiationFragment extends Fragment{
 
     private static final String ARG_PARAM1 = "data";
     private List<Quotes_Negotiation_Holder> list;
 
-    private OnNegotiationFragmentInteractionListener mListener;
+    public OnNegotiationFragmentInteractionListener mListener;
 
     public NegotiationFragment() {
         // Required empty public constructor
@@ -60,7 +60,9 @@ public class NegotiationFragment extends Fragment {
         mListener = null;
     }
 
+
+
     public interface OnNegotiationFragmentInteractionListener {
-        void onNegotiationFragmentInteraction(Uri uri);
+        void onNegotiationFragmentInteraction(Quotes_Negotiation_Holder holder);
     }
 }

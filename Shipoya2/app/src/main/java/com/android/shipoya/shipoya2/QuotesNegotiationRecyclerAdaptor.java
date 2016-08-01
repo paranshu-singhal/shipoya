@@ -2,12 +2,8 @@ package com.android.shipoya.shipoya2;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,9 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -28,7 +21,7 @@ public class QuotesNegotiationRecyclerAdaptor extends RecyclerView.Adapter<Quote
     List<Quotes_Negotiation_Holder> list;
     TextView carr_name, status, rating, price;
     Button confirm, negotiate;
-
+    onFragmentListener mCallback;
 
     public QuotesNegotiationRecyclerAdaptor(Context ctx, List<Quotes_Negotiation_Holder> list) {
         this.ctx = ctx;
@@ -69,17 +62,7 @@ public class QuotesNegotiationRecyclerAdaptor extends RecyclerView.Adapter<Quote
             confirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
-                    builder.setMessage(ctx.getResources().getString(R.string.confirm_sure))
-                            .setPositiveButton(ctx.getResources().getString(R.string.confirm), new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    (new uploadConfirm(holder)).execute();
-                                }
-                            })
-                            .setNegativeButton(ctx.getResources().getString(R.string.cancel), null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    ((ViewQuotesChildActivity)ctx).onConfirmItem(holder);
                 }
             });
         }
@@ -113,46 +96,8 @@ public class QuotesNegotiationRecyclerAdaptor extends RecyclerView.Adapter<Quote
         dialog.show(fm, "tag");
     }
 
-    public class uploadConfirm extends AsyncTask<Void, Void, String> {
-
-        Quotes_Negotiation_Holder holder;
-
-        public uploadConfirm(Quotes_Negotiation_Holder holder) {
-            this.holder = holder;
-        }
-
-        ProgressDialog dialog;
-
-        @Override
-        protected void onPreExecute() {
-            dialog = ProgressDialog.show(ctx, "", ctx.getResources().getString(R.string.loading_wait), true);
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-
-            String response = null;
-            String url = "/auction_resources/api/loads/" + holder.getOrder_id() + "/prelim_confirm";
-            try {
-                JSONObject container = new JSONObject();
-                container.put("confirmed_bid_id", holder.getBid_id());
-                response = MakeRequest.sendRequest(ctx, url, "POST", container);
-            } catch (Throwable t) {
-                Log.d("logTag", t.getMessage());
-            }
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            dialog.dismiss();
-            try {
-                JSONObject object = new JSONObject(s);
-                Toast.makeText(ctx, object.getString("message"), Toast.LENGTH_LONG).show();
-            } catch (Throwable t) {
-                Log.d("logTag", t.getMessage());
-            }
-        }
+    public interface onFragmentListener {
+        void onConfirmItem(Quotes_Negotiation_Holder holder);
     }
 
 

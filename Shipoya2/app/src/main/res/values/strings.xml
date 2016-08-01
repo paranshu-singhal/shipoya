@@ -11,6 +11,7 @@
     <string name="to">TO</string>
     <string name="schedule">SCHEDULE</string>
     <string name="expected_price">EXPECTED PRICE</string>
+    <string name="new_expected_price">NEW EXPECTED PRICE</string>
     <string name="material">MATERIAL</string>
     <string name="material_weight">MATERIAL WEIGHT</string>
     <string name="truck_type">TRUCK TYPE</string>
@@ -72,7 +73,7 @@
 
     <string name="pickup_date">Pickup Date</string>
     <string name="payment_terms">Payment Terms</string>
-    <string name="confirm_n_pay">CONFIRM AND PAY</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -81,6 +82,7 @@
     <string name="text_error">This field cannot be empty</string>
     <string name="number_error">Please enter a valid mobile number</string>
     <string name="greater_than_zero_error">This field should be greater than zero</string>
+    <string name="between_zero_99">This field should be between 0 and 99L</string>
     <string name="src_dest_same_error">Source and Destination cannot be same</string>
 
     <string name="submit">SUBMIT</string>
@@ -88,9 +90,13 @@
     <string name="view_orders_transition">ndns6dsd6ds</string>
 
     <string name="new_order">New Order</string>
+
     <string name="quotation">Quotation</string>
-    <string name="confirmed">Confirmed</string>
+    <string name="confirmed">Confirmation</string>
     <string name="confirm">Confirm</string>
+    <string name="confirm_n_pay">CONFIRM AND PAY</string>
+    <string name="awaiting_confirm">Awaiting confirmation</string>
+
     <string name="negotiate">Negotiate</string>
     <string name="pending">PENDING</string>
     <string name="paid">PAID</string>
@@ -101,7 +107,7 @@
     <string name="active_since">ACTIVE SINCE</string>
     <string name="update">UPDATE</string>
 
-    <string name="number_of_trucks">Number of trucks needed</string>
+    <string name="number_of_trucks">Number of Trucks Needed</string>
     <string name="ok">OK</string>
 
     <string name="conn_suspended">Connection to google suspended</string>
@@ -135,20 +141,100 @@
         <item>NEFT</item>
         <item>E-Wallet</item>
     </string-array>
+
     <string-array name="truck_type_1">
-        <item>Trailers - 10 Axle Trailer</item>
-        <item>Trucks 25 - Tons Taurus</item>
-        <item>Canters - Canters 4.5MT 4 Wheel</item>
+        <item>Trailers - 10 Axle trailer</item>
+        <item>Trailers - Flat Bed trailer (20-32 ft)</item>
+        <item>Trailers - Flat Bed trailer (40-54 ft)</item>
+        <item>Trailers - Hydraulic trailer</item>
+        <item>Trailers - Low Bed trailer</item>
+        <item>Trailers - Multi Axle trailer</item>
+        <item>Trailers - 20ft trailer High Bed</item>
+        <item>Trailers - 28 Feet JCB Trailer</item>
+        <item>Trucks - 25 Tons Taurus</item>
+        <item>Trucks - 20 Tons Taurus</item>
+        <item>Trucks - 16 Tons Taurus</item>
+        <item>Trucks - 9 Tons Truck</item>
+        <item>Trucks - Open Truck</item>
+        <item>Canters - Canters 4.5MT 4 wheel</item>
+        <item>Canters - Canters 4MT 4 wheel</item>
+        <item>Canters - Canters 7.5MT 6 wheel</item>
+        <item>Canters - Canters jumbo</item>
         <item>Containers - 32 Feet (14 Ton)</item>
+        <item>Containers - 32 Feet (7 Ton)</item>
+        <item>Containers - 24 Feet (14 Ton)</item>
+        <item>Containers - 24 Feet (7 Ton)</item>
+        <item>Containers - 20 Feet (7 Ton)</item>
     </string-array>
+
     <string-array name="truck_type_2">
         <item>Open Body</item>
         <item>Closed Body</item>
         <item>Flat Bed</item>
     </string-array>
 
+    <string-array name="material_type">
+        <item>Bardana Jute/Plastic</item>
+        <item>Building Materials</item>
+        <item>Chemicals</item>
+        <item>Coal and Ash</item>
+        <item>Container</item>
+        <item>Electronics/Consumer Durables</item>
+        <item>Fertilizers</item>
+        <item>Fruits and Vegetables</item>
+        <item>Furniture and Wood Products</item>
+        <item>House Hold Goods</item>
+        <item>Industrial Equipments</item>
+        <item>Liquids in Drums</item>
+        <item>Liquids/Oil</item>
+        <item>Machinery new/Machinery old/Tools/Spares</item>
+        <item>Medicines/Medical Material</item>
+        <item>Metals/Iron sheets/bars/scrap/others</item>
+        <item>Mill/Jute oil</item>
+        <item>Packed Food</item>
+        <item>Plastic pipes/Plastic products</item>
+        <item>Powder/Powder bags/Others</item>
+        <item>Printed books/Paper rolls</item>
+        <item>Refrigerated Products</item>
+        <item>Rice Products/Agricultural goods</item>
+        <item>Spices</item>
+        <item>Textiles</item>
+        <item>Tyres and Rubber products</item>
+        <item>Vehicles/Automobiles/Spare Parts</item>
+        <item>General/Others</item>
+    </string-array>
+
     <string name="loading_wait">Loading. Please wait...</string>
+    <string name="signing_in">Signing in..</string>
+
+    <string name="check_conn">Please check your internet connection and try again</string>
+    <string name="login_error">Login Error</string>
+
     <string name="confirm_sure">Are you sure you want to confirm?</string>
     <string name="cancel">Cancel</string>
+    <string name="contact_details">Contact Details</string>
+    <string name="office_details">Office Details</string>
+    <string name="general_details">General Details</string>
+    <string name="swipe_refresh">Swipe to refrsh</string>
+    <string name="edit">EDIT</string>
+
+    <string name="sign_up_its_free">Sign Up - It\'s Free</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="mobile_no">Mobile No.</string>
+    <string name="company_name">Company Name</string>
+    <string name="email">Email</string>
+
+    <string name="about">Shipoya is a technology company that provides cloud based solutions to help organizations smoothen their logistics and supply chain operations. Shipoya aims to deliver reliability through technology. It provides 100% transparency to its clients through a huge network of tech-enabled carriers. As the first step towards an efficient road transportation network, Shipoya offers on demand GPS enabled smart trucks through its web and mobile based apps. Since its establishment in 2015, Shipoya has been on a persistent drive to provide consumers with innovative solutions and to solve inefficiencies on both sides of the coin – the consumers and the truck owners. Shipoya is disrupting the logistics sector; with its unique operational model and cutting edge technology, Shipoya consistently provides unparalleled service level to its clients while constantly increasing the quality of life of people involved.
+\n\nShipoya gives special emphasis to operational safety and delivery time. This ensures better handling of goods along with an increase in consistency of delivery time. Through its innovative operating model, Shipoya ensures that consignments are delivered on time, every single time, and thereby offers a superior service quality to its clients. From the very start, clients can expect reduced Turn Around Time (TAT), significant reduction in logistics cost and a better control over their inventory. Clients from the Ecommerce, Pharmaceutical, FMCG, Manufacturing, Textile and White Goods sectors have already taken benefit of Shipoya’s technology platform. </string>
+
+    <string name="legal_f_a_q"><![CDATA[LEGAL & F.A.Q]]></string>
+    <string name="privacy_policy_title"><![CDATA[PRIVACY POLICY]]></string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+    <string name="first_time_txt">For first time login users </string>
+    <string name="click_here">Click Here</string>
+
+    <string name="check_mail_account">An e-mail has been sent to you. Please check your e-mail account.</string>
 
 </resources>

@@ -8,6 +8,7 @@ import android.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
 public class QuoteConfirmedDialog extends DialogFragment{
@@ -16,6 +17,7 @@ public class QuoteConfirmedDialog extends DialogFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.quote_confirmed_dialog, container, false);
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 
         ((TextView)v.findViewById(R.id.textView37)).setText("Your order with "+getArguments().getString("carr_name")+" on "+getArguments().getString("date")+" has been confirmed");
         getDialog().setCanceledOnTouchOutside(false);

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +23,7 @@ import java.util.Locale;
 
 public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAdapter.ViewHolder> {
 
+    private static final String TAGlog = "logTag";
 
     Context context;
     List<OrderParent> parentList;
@@ -83,9 +85,12 @@ public class OrdersRecyclerAdapter extends RecyclerView.Adapter<OrdersRecyclerAd
 
         //DateFormat dateOriginal = new SimpleDateFormat("S", Locale.ENGLISH);
         DateFormat dateFinal1 = new SimpleDateFormat("EEE, MMM d", Locale.ENGLISH);
-        DateFormat dateFinal2 = new SimpleDateFormat("yyyy", Locale.ENGLISH);
+        DateFormat dateFinal2 = new SimpleDateFormat("yyyy");
+        //Log.d(TAGlog, String.format("getDate: %d", obj.getDate()));
+        //Log.d(TAGlog, dateFinal2.format(new Date(System.currentTimeMillis())));
+        //Log.d(TAGlog, String.format("system: %d",System.currentTimeMillis()));
         try {
-            Date date = new Date(obj.getDate());
+            Date date = new Date((obj.getDate()*1000));
             holder.date.setText(dateFinal1.format(date));
             holder.yr.setText(dateFinal2.format(date));
         }

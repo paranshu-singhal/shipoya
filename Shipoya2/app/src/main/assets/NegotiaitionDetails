@@ -1,0 +1,249 @@
+{
+  "message": "retrieved n results",
+  "data": {
+    "auction_negotiations": [],
+    "load_negotiations": [
+      {
+        "order_details": {
+          "order_name": "order 78",
+          "load_type": "Part Truck Load",
+          "destination": {
+            "city": "Aligarh",
+            "state": "Uttar Pradesh"
+          },
+          "truck_type": {
+            "truck_tonnage": "0-2 MT",
+            "truck_length": "0-9 feet",
+            "truck_type": "Cargo Carriers"
+          },
+          "consignment_weight": 12,
+          "source": {
+            "city": "Agra",
+            "state": "Uttar Pradesh"
+          },
+          "order_id": "llDS6UQ7SGGexpHzDsE6RcNi",
+          "scheduled_on": 1466445629,
+          "quote_confirmed_shipper": false,
+          "material_type": "Metals"
+        },
+        "negotiation_details": {
+          "timestamp": "2016-07-08T15:59:38",
+          "shipper_price": 588,
+          "bid_id": "blQgJTVArGfsw6PDT9jmF7R8",
+          "user_id": "suvp2Aq7iUZjvo5Xk67qexi7"
+        },
+        "bid_details": {
+          "quote_amount": 100000,
+          "carrier_rating": "nav",
+          "bid_id": "blQgJTVArGfsw6PDT9jmF7R8",
+          "carrier_id": "clWf5pPEfox7QQmZ6TQG7kxQ",
+          "load_id": "llDS6UQ7SGGexpHzDsE6RcNi",
+          "bid_timestamp": 1467391442,
+          "carrier_name": "Shyam Logistics Pvt. Ltd"
+        }
+      },
+      {
+        "order_details": {
+          "order_name": "testorde",
+          "load_type": "Part Truck Load",
+          "destination": {
+            "city": "Gurgaon",
+            "state": "Haryana",
+            "area": "Sohna Road,"
+          },
+          "truck_type": {
+            "truck_tonnage": "0-2 MT",
+            "truck_length": "0-9 feet",
+            "truck_type": "Trailers – 10 Axle Trailer"
+          },
+          "consignment_weight": 234,
+          "source": {
+            "city": "Agra",
+            "state": "Uttar Pradesh"
+          },
+          "order_id": "llnfsB2gRFVCGExWrrBqSjVc",
+          "scheduled_on": 1467050429,
+          "quote_confirmed_shipper": false,
+          "material_type": "Bardana jute/plastic"
+        },
+        "negotiation_details": {
+          "timestamp": "2016-07-08T00:14:20",
+          "shipper_price": 1455,
+          "bid_id": "blYzeYXMh7ooMPUjV92KpskE",
+          "user_id": "suvp2Aq7iUZjvo5Xk67qexi7"
+        },
+        "bid_details": {
+          "quote_amount": 1455,
+          "carrier_rating": "nav",
+          "bid_id": "blYzeYXMh7ooMPUjV92KpskE",
+          "carrier_id": "clESY4gty9UD4xb6vjA3mFyh",
+          "load_id": "llnfsB2gRFVCGExWrrBqSjVc",
+          "bid_timestamp": 1468063854,
+          "carrier_name": "Safe Express"
+        }
+      },
+      {
+        "order_details": {
+          "order_name": "MFR2",
+          "load_type": "Full Truck Load",
+          "destination": {
+            "city": "Shyam Sunder Warehousing Complex",
+            "state": "Bhiwandi"
+          },
+          "truck_type": {
+            "truck_tonnage": "7-9 MT",
+            "truck_length": "0-9 feet",
+            "truck_type": "Canters - Canters 7.5MT 6 wheel"
+          },
+          "consignment_weight": 65,
+          "source": {
+            "city": "Sanjay Gandhi Transport Nagar",
+            "state": "Bawana"
+          },
+          "order_id": "llArutSn5qgSHLunKNMpF2pU",
+          "scheduled_on": 1467118147,
+          "quote_confirmed_shipper": false,
+          "material_type": "Medicines/Medical material"
+        },
+        "negotiation_details": {
+          "timestamp": "2016-06-28T12:58:00",
+          "shipper_price": 95000,
+          "bid_id": "blayv8NTHbggPwwYLF2e66WR",
+          "user_id": "suvp2Aq7iUZjvo5Xk67qexi7"
+        },
+        "bid_details": {
+          "quote_amount": 95000,
+          "carrier_rating": "nav",
+          "bid_id": "blayv8NTHbggPwwYLF2e66WR",
+          "carrier_id": "clESY4gty9UD4xb6vjA3mFyh",
+          "load_id": "llArutSn5qgSHLunKNMpF2pU",
+          "bid_timestamp": 1468064565,
+          "carrier_name": "Safe Express"
+        }
+      },
+      {
+        "order_details": {
+          "order_name": "DELtoAGR",
+          "load_type": "Full Truck Load",
+          "destination": {
+            "city": "TajMahal",
+            "state": "Agra"
+          },
+          "truck_type": {
+            "truck_tonnage": "15-20 MT",
+            "truck_length": "32-40 feet",
+            "truck_type": "Containers - 32 Feet (14 Ton)"
+          },
+          "consignment_weight": 20,
+          "source": {
+            "city": "Naraina",
+            "state": "Delhi"
+          },
+          "order_id": "ll8Vveu2z6PMUutToXJPGFp7",
+          "scheduled_on": 1467131183,
+          "quote_confirmed_shipper": false,
+          "material_type": "Bardana jute/plastic"
+        },
+        "negotiation_details": {
+          "timestamp": "2016-07-07T12:17:21",
+          "shipper_price": 11000,
+          "bid_id": "blNKFUGcyuCCi3FFKLh6Nrwd",
+          "user_id": "suvp2Aq7iUZjvo5Xk67qexi7"
+        },
+        "bid_details": {
+          "quote_amount": 120000,
+          "carrier_rating": "nav",
+          "bid_id": "blNKFUGcyuCCi3FFKLh6Nrwd",
+          "carrier_id": "clESY4gty9UD4xb6vjA3mFyh",
+          "load_id": "ll8Vveu2z6PMUutToXJPGFp7",
+          "bid_timestamp": 1468065651,
+          "carrier_name": "Safe Express"
+        }
+      },
+      {
+        "order_details": {
+          "order_name": "fff",
+          "load_type": "Part Truck Load",
+          "destination": {
+            "city": " Pakistan",
+            "state": " Sindh",
+            "area": "Karachi"
+          },
+          "truck_type": {
+            "truck_tonnage": "0-2 MT",
+            "truck_length": "0-9 feet",
+            "truck_type": "Canters - Canters 4.5MT 4 Wheel"
+          },
+          "consignment_weight": 1200,
+          "source": {
+            "city": " India",
+            "state": " Delhi",
+            "area": "Punjabi Bagh New Delhi"
+          },
+          "order_id": "lldbyowH93YJRR37YjFDwzDG",
+          "scheduled_on": 1467331577,
+          "quote_confirmed_shipper": false,
+          "material_type": "food"
+        },
+        "negotiation_details": {
+          "timestamp": "2016-07-07T12:20:57",
+          "shipper_price": 12000,
+          "bid_id": "blCzKDFUfqudrUtdve8pkrkK",
+          "user_id": "suvp2Aq7iUZjvo5Xk67qexi7"
+        },
+        "bid_details": {
+          "quote_amount": 12000,
+          "carrier_rating": "nav",
+          "bid_id": "blCzKDFUfqudrUtdve8pkrkK",
+          "carrier_id": "clESY4gty9UD4xb6vjA3mFyh",
+          "load_id": "lldbyowH93YJRR37YjFDwzDG",
+          "bid_timestamp": 1468064994,
+          "carrier_name": "Safe Express"
+        }
+      },
+      {
+        "order_details": {
+          "order_name": "Mtest2",
+          "load_type": "Part Truck Load",
+          "destination": {
+            "city": "Bengaluru",
+            "state": "Karnataka",
+            "area": "Koramangala 2nd Block, Koramangala,"
+          },
+          "truck_type": {
+            "truck_tonnage": "0-2 MT",
+            "truck_length": "0-9 feet",
+            "truck_type": "Trailers – 10 Axle Trailer"
+          },
+          "consignment_weight": 23,
+          "source": {
+            "city": "New Delhi",
+            "state": "Delhi",
+            "area": "Naraina,"
+          },
+          "order_id": "llSPK2NK4739ENvymqahc5JB",
+          "scheduled_on": 1467988401,
+          "quote_confirmed_shipper": false,
+          "material_type": "Bardana jute/plastic"
+        },
+        "negotiation_details": {
+          "timestamp": "2016-07-08T15:29:46",
+          "shipper_price": 450,
+          "bid_id": "blv2oqrdVycXnQRdW3Mjrcci",
+          "user_id": "suvp2Aq7iUZjvo5Xk67qexi7"
+        },
+        "bid_details": {
+          "quote_amount": 400,
+          "carrier_rating": "nav",
+          "bid_id": "blv2oqrdVycXnQRdW3Mjrcci",
+          "carrier_id": "clESY4gty9UD4xb6vjA3mFyh",
+          "load_id": "llSPK2NK4739ENvymqahc5JB",
+          "bid_timestamp": 1467991726,
+          "carrier_name": "Safe Express"
+        }
+      }
+    ]
+  },
+  "http_code": 200,
+  "success": true
+}

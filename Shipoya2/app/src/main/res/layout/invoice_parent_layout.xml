@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginRight="5dp"
-    android:orientation="vertical"
+    android:layout_marginTop="@dimen/card_zero_margin"
+    android:layout_marginBottom="@dimen/card_zero_margin"
+    android:layout_marginLeft="@dimen/card_side_margin"
+    android:layout_marginRight="@dimen/card_side_margin"
     android:background="@android:drawable/list_selector_background"
-    app:cardElevation="6dp"
-    app:contentPadding="16dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardElevation="@dimen/card_elevation"
+    app:cardPreventCornerOverlap="false"
+    app:contentPadding="16dp">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -23,7 +22,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:orientation="vertical">
 
             <LinearLayout
@@ -109,7 +108,7 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/rounded_green"
-                android:text="Due Since 50 days" />
+                android:text="Pending" />
         </LinearLayout>
 
     </LinearLayout>
